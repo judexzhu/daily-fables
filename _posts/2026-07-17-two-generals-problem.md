@@ -5,6 +5,7 @@ title_zh: "雾谷两端的火把"
 title_en: "The Torches Across the Fog Valley"
 concept: "Two Generals Problem"
 tags: [distributed-systems, networking]
+illustration: /assets/art/2026-07-17-two-generals-problem.svg
 ---
 <section class="zh" markdown="1">
 雾谷两侧，东岭和西岭各有一支猎队，约好只有两边**同时**举火把，才能围住谷里的狼群——单独一边动手，不但围不住，还会打草惊蛇。可两岭之间隔着一条常年起雾的深谷，传话全靠跑腿的伙计，雾大路滑，十个伙计里保不齐哪个就迷了路。
