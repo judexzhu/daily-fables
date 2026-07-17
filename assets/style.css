@@ -35,7 +35,7 @@ a:hover { text-decoration: underline; }
 
 .site-header { text-align: center; padding: 3rem 1rem 1.5rem; }
 .site-title {
-  font-size: 2.2rem; letter-spacing: 0.35rem; color: var(--ink);
+  font-size: 2.2rem; letter-spacing: 0.12rem; color: var(--ink);
   border-bottom: 3px double var(--rule); padding-bottom: 0.4rem;
 }
 .site-subtitle { color: var(--ink-soft); font-style: italic; margin-top: 0.8rem; font-size: 0.95rem; }
