@@ -1,0 +1,18 @@
+---
+layout: default
+---
+<p class="index-hint">每天一则寓言，讲透一个分布式系统 / 云平台概念。悬停右侧词条可提前揭晓谜底。<br>
+One fable a day, one graduate-level cloud concept. Hover a chip to spoil the reveal.</p>
+
+<ul class="fable-list">
+{% for post in site.posts %}
+  <li>
+    <span class="date">{{ post.date | date: "%Y-%m-%d" }}</span>
+    <span class="titles">
+      <a href="{{ post.url | relative_url }}">{{ post.title_zh | default: post.title }}</a>
+      <span class="title-en">{{ post.title_en }}</span>
+    </span>
+    <span class="concept-chip">{{ post.concept }}</span>
+  </li>
+{% endfor %}
+</ul>

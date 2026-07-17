@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+<meta name="description" content="{{ page.excerpt | default: site.description | strip_html | truncate: 160 }}">
+<link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+</head>
+<body>
+<header class="site-header">
+  <a class="site-title" href="{{ '/' | relative_url }}">每日寓言</a>
+  <p class="site-subtitle">Daily Fables — cloud &amp; distributed systems, one story at a time</p>
+</header>
+<main>
+{{ content }}
+</main>
+<footer class="site-footer">
+  <p>晨读三五分钟 · A fable a day · <a href="https://github.com/judexzhu/daily-fables">source</a></p>
+</footer>
+</body>
+</html>
