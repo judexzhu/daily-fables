@@ -63,6 +63,7 @@ a:hover { text-decoration: underline; }
 .fable-title { font-size: 1.7rem; line-height: 1.4; margin: 0.3rem 0 0.2rem; }
 .fable-title-zh { color: var(--ink-soft); font-size: 1.05rem; margin: 0 0 0.3rem; }
 .fable-concept { color: var(--ink-soft); font-size: 0.9rem; }
+.fable-art { display: block; width: 100%; height: auto; border: 1px solid var(--rule); border-radius: 10px; margin: 1.2rem 0 0.4rem; }
 .lang-toggle { margin: 1.4rem 0; display: flex; gap: 0.5rem; }
 .lang-toggle button {
   font: inherit; font-size: 0.85rem; color: var(--ink-soft);

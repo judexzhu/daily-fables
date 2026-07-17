@@ -7,6 +7,8 @@ layout: default
   <p class="fable-title-zh">{{ page.title_zh }}</p>
   <p class="fable-concept">concept: <span class="concept-chip">{{ page.concept }}</span></p>
 
+  {% if page.illustration %}<img class="fable-art" src="{{ page.illustration | relative_url }}" alt="Illustration: {{ page.title_en }}">{% endif %}
+
   <div class="lang-toggle" role="tablist">
     <button data-lang="en" aria-pressed="true">English</button>
     <button data-lang="zh" aria-pressed="false">中文</button>
