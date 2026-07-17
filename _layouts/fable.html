@@ -3,16 +3,16 @@ layout: default
 ---
 <article class="fable-page">
   <p class="fable-date">{{ page.date | date: "%Y-%m-%d" }}</p>
-  <h1 class="fable-title">{{ page.title }}</h1>
+  <h1 class="fable-title">{{ page.title_en | default: page.title }}</h1>
+  <p class="fable-title-zh">{{ page.title_zh }}</p>
   <p class="fable-concept">concept: <span class="concept-chip">{{ page.concept }}</span></p>
 
   <div class="lang-toggle" role="tablist">
+    <button data-lang="en" aria-pressed="true">English</button>
     <button data-lang="zh" aria-pressed="false">中文</button>
-    <button data-lang="both" aria-pressed="true">对照</button>
-    <button data-lang="en" aria-pressed="false">English</button>
   </div>
 
-  <div class="fable-body">
+  <div class="fable-body lang-en">
     {{ content }}
   </div>
 
@@ -35,8 +35,9 @@ layout: default
   buttons.forEach(function (b) {
     b.addEventListener('click', function () { setLang(b.dataset.lang); });
   });
-  var saved = 'both';
-  try { saved = localStorage.getItem('fable-lang') || 'both'; } catch (e) {}
+  var saved = 'en';
+  try { saved = localStorage.getItem('fable-lang') || 'en'; } catch (e) {}
+  if (saved !== 'zh' && saved !== 'en') saved = 'en';
   setLang(saved);
 })();
 </script>

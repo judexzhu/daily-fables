@@ -61,6 +61,7 @@ a:hover { text-decoration: underline; }
 /* fable page */
 .fable-date { color: var(--ink-soft); font-size: 0.9rem; margin-bottom: 0; }
 .fable-title { font-size: 1.7rem; line-height: 1.4; margin: 0.3rem 0 0.2rem; }
+.fable-title-zh { color: var(--ink-soft); font-size: 1.05rem; margin: 0 0 0.3rem; }
 .fable-concept { color: var(--ink-soft); font-size: 0.9rem; }
 .lang-toggle { margin: 1.4rem 0; display: flex; gap: 0.5rem; }
 .lang-toggle button {

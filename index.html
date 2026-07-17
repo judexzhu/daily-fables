@@ -9,8 +9,8 @@ One fable a day, one graduate-level cloud concept. Hover a chip to spoil the rev
   <li>
     <span class="date">{{ post.date | date: "%Y-%m-%d" }}</span>
     <span class="titles">
-      <a href="{{ post.url | relative_url }}">{{ post.title_zh | default: post.title }}</a>
-      <span class="title-en">{{ post.title_en }}</span>
+      <a href="{{ post.url | relative_url }}">{{ post.title_en | default: post.title }}</a>
+      <span class="title-en">{{ post.title_zh }}</span>
     </span>
     <span class="concept-chip">{{ post.concept }}</span>
   </li>
