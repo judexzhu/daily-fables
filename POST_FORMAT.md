@@ -10,7 +10,7 @@ title_zh: "<中文标题>"
 title_en: "<English Title>"
 concept: "<English concept name>"
 tags: [<1-3 lowercase area tags>]
-illustration: /assets/art/YYYY-MM-DD-<concept-slug>.svg
+illustration: /assets/art/YYYY-MM-DD-<concept-slug>.jpg
 ---
 <section class="zh" markdown="1">
 中文正文（不含标题行）…
@@ -34,9 +34,10 @@ Conversion rules from fable text:
 - `_italic_` and backtick code spans work in kramdown unchanged. Escape double quotes in front-matter strings.
 
 ## Illustration (assets/art/)
-Each fable gets a hand-drawn SVG scene, same filename stem as the post. Style rules:
-- viewBox `0 0 800 450`, flat storybook/woodcut style, no text in the image.
-- Palette only: paper `#f6efe2` / `#efe5d2`, ink `#5b4a33` / `#2d2418`, soft ink `#6b5d49` / `#a3947b`, accent `#a4502c` / `#d98a5f` / `#e8b27d`, rule `#d8c9ac`, chip `#e6d8bd`.
-- Depict the STORY scene (the village/dock/kitchen…), not the technical concept; no diagrams, no arrows, no labels.
-- Simple shapes: polygons, ellipses, a few paths; small human silhouettes allowed; finish with a rounded-rect frame stroke `#d8c9ac` width 3 inset 6px.
-- Reference in front matter: `illustration: /assets/art/<same-stem>.svg`.
+Each fable gets one AI-generated illustration, same filename stem as the post, generated via the `nanobanana` MCP `generate_image` tool (Gemini image model). Generate it once — don't iterate or regenerate to pick a favorite.
+
+- Prompt describes the STORY scene only (setting, characters, action, mood) — never the technical concept, no diagrams, no arrows, no labels, no text in the image.
+- Style: flat papercut/woodcut storybook illustration, warm palette (paper cream, warm brown ink, muted brown, terracotta/ochre accents).
+- `aspect_ratio: "16:9"`.
+- Generate to a local temp path, then compress with ImageMagick before publishing: `convert input.png -resize 800x450 -quality 65 output.jpg`, aiming for under ~60KB so the base64 payload stays small.
+- Reference in front matter: `illustration: /assets/art/<same-stem>.jpg`.
