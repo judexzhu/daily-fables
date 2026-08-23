@@ -153,7 +153,7 @@ h1, h2, h3 { font-weight: 400; }
 .row-concept { text-align: right; color: #7a6f64; text-transform: uppercase; }
 
 /* ---- fable article ---- */
-.article { max-width: 940px; margin-left: 0; }
+.article { max-width: 940px; margin: 0 auto; }
 .article-head { margin-top: -190px; background: var(--paper); padding: 60px 68px 0; position: relative; }
 .article-head h1 {
   margin: 0; color: var(--ink);
