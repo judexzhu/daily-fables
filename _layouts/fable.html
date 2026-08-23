@@ -11,6 +11,7 @@ layout: default
   <div class="fable-video">
     <iframe src="https://www.youtube.com/embed/{{ page.youtube_id }}" frameborder="0" allowfullscreen loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
   </div>
+  <p class="fable-video-caption">▶ Cinematic fable · <a href="https://www.youtube.com/watch?v={{ page.youtube_id }}" target="_blank" rel="noopener">Watch on YouTube</a></p>
   {% elsif page.illustration %}
   <img class="fable-art" src="{{ page.illustration | relative_url }}" alt="Illustration: {{ page.title_en }}">
   {% endif %}
