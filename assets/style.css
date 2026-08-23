@@ -47,6 +47,7 @@ a:hover { text-decoration: underline; }
   padding: 1.1rem 0; border-bottom: 1px solid var(--rule);
   display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.6rem;
 }
+.fable-thumb { width: 80px; height: 45px; object-fit: cover; border-radius: 6px; border: 1px solid var(--rule); flex-shrink: 0; }
 .fable-list .date { color: var(--ink-soft); font-variant-numeric: tabular-nums; font-size: 0.9rem; min-width: 6.2rem; }
 .fable-list .titles { flex: 1; min-width: 14rem; }
 .fable-list .title-en { display: block; color: var(--ink-soft); font-style: italic; font-size: 0.9rem; }

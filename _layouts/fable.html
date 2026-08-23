@@ -7,12 +7,12 @@ layout: default
   <p class="fable-title-zh">{{ page.title_zh }}</p>
   <p class="fable-concept">concept: <span class="concept-chip">{{ page.concept }}</span></p>
 
-  {% if page.illustration %}<img class="fable-art" src="{{ page.illustration | relative_url }}" alt="Illustration: {{ page.title_en }}">{% endif %}
-
   {% if page.youtube_id %}
   <div class="fable-video">
     <iframe src="https://www.youtube.com/embed/{{ page.youtube_id }}" frameborder="0" allowfullscreen loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
   </div>
+  {% elsif page.illustration %}
+  <img class="fable-art" src="{{ page.illustration | relative_url }}" alt="Illustration: {{ page.title_en }}">
   {% endif %}
 
   <div class="lang-toggle" role="tablist">
