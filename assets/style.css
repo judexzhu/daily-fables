@@ -25,7 +25,7 @@ body {
   background-image: radial-gradient(var(--paper-deep) 0.6px, transparent 0.6px);
   background-size: 26px 26px;
   color: var(--ink);
-  font-family: Georgia, "Source Serif 4", "Songti SC", "Noto Serif SC", "Noto Serif CJK SC", serif;
+  font-family: "Cormorant Garamond", "LXGW WenKai", Georgia, "Songti SC", serif;
   line-height: 1.85;
   font-size: 17px;
 }
