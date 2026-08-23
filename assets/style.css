@@ -76,7 +76,7 @@ h1, h2, h3 { font-weight: 400; }
 .hero-fable { height: 74vh; min-height: 520px; }
 .hero-art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .hero-home .hero-art { opacity: 0.5; }
-.hero-fable .hero-art { opacity: 0.72; }
+.hero-fable .hero-art { opacity: 1; }
 .hero-scrim {
   position: absolute; inset: 0;
   background: linear-gradient(to top, var(--ink) 4%, rgba(18,16,14,0.82) 42%, rgba(18,16,14,0.35) 100%);
@@ -144,9 +144,11 @@ h1, h2, h3 { font-weight: 400; }
 /* ---- earlier rows ---- */
 .row-list { display: flex; flex-direction: column; }
 .row {
-  display: grid; grid-template-columns: 110px 1fr 300px; gap: 32px; align-items: baseline;
-  padding: 20px 12px; border-bottom: 1px solid var(--line-2); color: inherit; transition: background 200ms;
+  display: grid; grid-template-columns: 64px 110px 1fr 300px; gap: 20px; align-items: center;
+  padding: 14px 12px; border-bottom: 1px solid var(--line-2); color: inherit; transition: background 200ms;
 }
+.row-thumb { width: 64px; height: 36px; overflow: hidden; border-radius: 4px; background: var(--paper-2); flex-shrink: 0; }
+.row-thumb img { width: 100%; height: 100%; object-fit: cover; }
 .row:hover { background: var(--paper-2); color: inherit; }
 .row-title { font-size: 21px; line-height: 1.3; }
 .row-title.zh { line-height: 1.5; }

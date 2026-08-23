@@ -62,6 +62,7 @@ layout: default
     <div class="row-list">
       {% for post in rest offset: 6 %}
       <a class="row" href="{{ post.url | relative_url }}">
+        <span class="row-thumb">{% if post.illustration %}<img src="{{ post.illustration | relative_url }}" alt="" loading="lazy">{% endif %}</span>
         <span class="mono dim">{{ post.date | date: '%Y-%m-%d' }}</span>
         <span class="row-title en-only">{{ post.title_en | default: post.title }}</span>
         <span class="row-title zh-only zh">{{ post.title_zh | default: post.title }}</span>

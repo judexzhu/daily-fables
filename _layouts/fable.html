@@ -1,9 +1,9 @@
 ---
 layout: default
 ---
-<header class="hero hero-fable">
+<header class="hero hero-fable" id="fable-hero">
   {% if page.illustration %}<img class="hero-art" src="{{ page.illustration | relative_url }}" alt="Illustration: {{ page.title_en }}">{% endif %}
-  <div class="hero-scrim"></div>
+  <div class="hero-scrim" id="fable-scrim"></div>
 </header>
 
 <div class="paper">
@@ -41,3 +41,19 @@ layout: default
     </div>
   </article>
 </div>
+<script>
+(function () {
+  var scrim = document.getElementById('fable-scrim');
+  var hero = document.getElementById('fable-hero');
+  if (!scrim || !hero) return;
+  var h = hero.offsetHeight;
+  function update() {
+    var t = window.pageYOffset || document.documentElement.scrollTop;
+    var ratio = Math.min(t / (h * 0.5), 1);
+    scrim.style.opacity = ratio;
+  }
+  scrim.style.opacity = 0;
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+</script>
