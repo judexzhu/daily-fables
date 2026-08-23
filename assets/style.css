@@ -40,6 +40,7 @@ a:hover { text-decoration: underline; }
 }
 .site-subtitle { color: var(--ink-soft); font-style: italic; margin-top: 0.8rem; font-size: 0.95rem; }
 .site-footer { text-align: center; color: var(--ink-soft); font-size: 0.85rem; padding: 2rem 0 3rem; }
+.bmc-button { height: 40px; border-radius: 8px; }
 
 /* index */
 .fable-list { list-style: none; padding: 0; }
