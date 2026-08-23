@@ -5,6 +5,7 @@ title_zh: "渔村补网的规矩"
 title_en: "The Fishing Village's Repair Rule"
 concept: "PodDisruptionBudget"
 tags: [kubernetes]
+illustration: /assets/art/2026-07-06-pod-disruption-budget.jpg
 ---
 <section class="zh" markdown="1">
 云溪湾是个小渔村,六条渔船每天轮流出海,村里的鱼摊全靠它们撑着。渔网泡了海水,用久了会朽,补网是免不了的事。可补网得把船拉上岸,一拉就是大半天,船不出海,那天的鱼就少一份。

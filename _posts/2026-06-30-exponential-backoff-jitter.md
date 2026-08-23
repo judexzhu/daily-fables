@@ -5,6 +5,7 @@ title_zh: "总在同一刻打来的电话"
 title_en: "The Calls That Always Came at Once"
 concept: "exponential backoff with jitter"
 tags: [distributed-systems]
+illustration: /assets/art/2026-06-30-exponential-backoff-jitter.jpg
 ---
 <section class="zh" markdown="1">
 镇上只有一家小馆子，老板娘守着一部电话接订座。这部电话一次只能通一个人。

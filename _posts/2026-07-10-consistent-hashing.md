@@ -5,6 +5,7 @@ title_zh: "环湖驿站的送信人"
 title_en: "The Lakeside Mail Carriers"
 concept: "consistent hashing"
 tags: [distributed-systems]
+illustration: /assets/art/2026-07-10-consistent-hashing.jpg
 ---
 <section class="zh" markdown="1">
 云溪湖是个圆形的湖，沿湖住着几千户人家，家家户户的门牌号乱七八糟地散落在湖岸各处，谁也说不准下一家挨着哪家。镇上负责送信的驿站想了个法子：先把整圈湖岸看成一条首尾相连的环形路——门牌号（说白了就是姓名+地址）经过一套固定的换算规则，会落在这条环路上的某个具体位置，谁的门牌换算出来数字越大，就落在环路上越靠"后"的位置，最大的数字绕回来又和最小的数字挨在一起，成了一个圈。

@@ -5,6 +5,7 @@ title_zh: "印坊的那台压印机"
 title_en: "The Print Shop's Only Press"
 concept: "cgroup CPU throttling"
 tags: [linux, kubernetes]
+illustration: /assets/art/2026-07-02-cgroup-cpu-throttling.jpg
 ---
 <section class="zh" markdown="1">
 小镇上有一间老字号印坊，坊里养着七八个学徒，却只有一台压印机——那年头造一台不便宜，老板舍不得多添。为了不让谁霸占太久，老板定了个规矩：每一炷香的时间（约一百息），分给每个学徒_固定的一段份额_——比如老三这炉香里能用满二十息，用完这二十息，压印机的踏板就会被锁住，直到下一炷新香点起，才重新解锁。

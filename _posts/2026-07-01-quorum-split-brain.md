@@ -5,6 +5,7 @@ title_zh: "断桥之后的清源寺"
 title_en: "Qingyuan Temple After the Broken Bridge"
 concept: "quorum and split-brain"
 tags: [distributed-systems]
+illustration: /assets/art/2026-07-01-quorum-split-brain.jpg
 ---
 <section class="zh" markdown="1">
 清源寺住着九位长老。寺里有一条铁律：任何一件大事——收徒、动用粮仓、修改戒律——都要写进那本唯一的《总账》里，而且*必须有超过一半的长老当场按下手印*，这一笔才算数。八九不离十的多数不行，正好一半也不行，必须是"过半"，也就是至少五个手印。

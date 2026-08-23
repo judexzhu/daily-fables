@@ -5,6 +5,7 @@ title_zh: "环形街上的邮差"
 title_en: "The Postmen on the Ring Street"
 concept: "consistent hashing"
 tags: [distributed-systems]
+illustration: /assets/art/2026-06-29-consistent-hashing.jpg
 ---
 <section class="zh" markdown="1">
 在云脚镇，所有人家都沿着一条环形的石板路住着。这条路绕成一个完整的圆圈，没有起点，也没有终点——从镇口出发一直走，最后总会回到镇口。

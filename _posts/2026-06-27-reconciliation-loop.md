@@ -5,6 +5,7 @@ title_zh: "园丁老周的那幅画"
 title_en: "Old Zhou the Gardener and His Painting"
 concept: "reconciliation loop (level-triggered control)"
 tags: [kubernetes]
+illustration: /assets/art/2026-06-27-reconciliation-loop.jpg
 ---
 <section class="zh" markdown="1">
 村东头有个园丁，叫老周。他守着一座很大的花园，主人常年不在，只在工具棚里留下一幅画。画上是花园"应该有的样子"：三十棵月季、一池睡莲、东墙爬满藤、草坪修到脚踝高。

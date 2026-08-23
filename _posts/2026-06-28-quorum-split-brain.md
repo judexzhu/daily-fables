@@ -5,6 +5,7 @@ title_zh: "云顶寺的那口大钟"
 title_en: "The Great Bell of Cloud-Summit Temple"
 concept: "quorum and split-brain"
 tags: [distributed-systems]
+illustration: /assets/art/2026-06-28-quorum-split-brain.jpg
 ---
 <section class="zh" markdown="1">
 云顶寺建在两座山峰之间，靠一道石桥连着。寺里有五位长老，共同掌管两件大事：敲响那口能传到整个山谷的_大钟_，和打开存着全寺过冬粮食的_粮仓_。

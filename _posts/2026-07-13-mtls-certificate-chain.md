@@ -5,6 +5,7 @@ title_zh: "关市的双验引信"
 title_en: "The Double-Checked Pass at the Border Market"
 concept: "certificate chain of trust and mTLS"
 tags: [security, networking]
+illustration: /assets/art/2026-07-13-mtls-certificate-chain.jpg
 ---
 <section class="zh" markdown="1">
 云关是两国交界处唯一的互市关口，商队要在这里换取货物。规矩是：凡想入市交易，先得亮出一张_引_——一张薄薄的信笺，写着持信人姓名、行会，还有一段"某月某日至某月某日方可通行"的日期。

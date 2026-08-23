@@ -5,6 +5,7 @@ title_zh: "灶台上的那炷香"
 title_en: "The Stove's Incense-Stick Rule"
 concept: "cgroup CPU throttling"
 tags: [kubernetes, linux]
+illustration: /assets/art/2026-07-16-cgroup-cpu-throttling.jpg
 ---
 <section class="zh" markdown="1">
 老周在巷子口开了家炒粉摊,生意好起来后雇了个厨子小陈掌勺。可老周信不过年轻人手脚,怕他把一整天的煤气都烧光,便定了个规矩:把一天切成一炷香一炷香的小段(每炷香约烧完需五分钟),每一炷香里,小陈只能用灶台"四分之一"的时间明火炒菜,剩下四分之三时间灶台必须闭着——哪怕锅里还有没炒熟的菜,哪怕外面排队的人越等越急。

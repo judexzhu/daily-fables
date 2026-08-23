@@ -5,6 +5,7 @@ title_zh: "码头仓库的储物柜"
 title_en: "The Lockers at the Cargo Dock"
 concept: "CSI VolumeAttachment and attach/detach protection"
 tags: [kubernetes, storage]
+illustration: /assets/art/2026-07-08-volumeattachment-attach-detach.jpg
 ---
 <section class="zh" markdown="1">
 云港码头有一排贴着编号的铁皮储物柜，专门存放临时要用的货物工具——扳手、绳索、防水布。每个搬运班组要用哪个柜子，得先去总务处登记。

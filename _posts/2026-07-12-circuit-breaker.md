@@ -5,6 +5,7 @@ title_zh: "山间索道站的止运规矩"
 title_en: "The Mountain Cableway's Shutdown Rule"
 concept: "circuit breaker"
 tags: [distributed-systems, kubernetes]
+illustration: /assets/art/2026-07-12-circuit-breaker.jpg
 ---
 <section class="zh" markdown="1">
 云岭索道有两站:上站建在半山腰的货场,下站在谷底的分拣场。每天清晨,上站的老站长把成箱的山货装上缆车,一趟趟送下去,下站的分拣工人当场卸货、过秤、装车转运。

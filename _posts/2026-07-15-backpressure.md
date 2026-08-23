@@ -5,6 +5,7 @@ title_zh: "溪谷磨坊的闸门信号"
 title_en: "The Sluice Gate of the Valley Mill"
 concept: "backpressure"
 tags: [distributed-systems, kubernetes]
+illustration: /assets/art/2026-07-15-backpressure.jpg
 ---
 <section class="zh" markdown="1">
 深山溪谷里有一座老磨坊，靠一架水车推着石磨，把山民送来的麦子磨成面粉。磨坊主老计守了这磨坊三十年，早年立下一条规矩：磨坊角落堆放空布袋的地方就那么大，最多摆得下十二只——磨出来的面粉必须当场装袋，装满的袋子堆在墙边，等每日午后骡队上山来驮走。

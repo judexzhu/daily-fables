@@ -5,6 +5,7 @@ title_zh: "云集镇的两位守门官"
 title_en: "The Two Gatekeepers of Cloud-Market Town"
 concept: "admission webhooks and failurePolicy"
 tags: [kubernetes, security]
+illustration: /assets/art/2026-07-05-admission-webhooks.jpg
 ---
 <section class="zh" markdown="1">
 云集镇是方圆百里最大的集市，镇子中央有一间_总账房_，镇上所有买卖成交与否，全靠那本_总账_说了算——只要写进总账，这笔交易就算数，谁也翻不了案。

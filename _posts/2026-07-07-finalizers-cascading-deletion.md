@@ -5,6 +5,7 @@ title_zh: "藏书阁的撤架清单"
 title_en: "The Archive's Withdrawal Checklist"
 concept: "finalizers and cascading deletion"
 tags: [kubernetes]
+illustration: /assets/art/2026-07-07-finalizers-cascading-deletion.jpg
 ---
 <section class="zh" markdown="1">
 临溪阁是城里最大的藏书楼，楼里最贵重的，是几套流传百年的《地方志》全集——每一套都是"母书"，母书之下又分装着几十册"分卷"，分卷各自单独上架，方便读者借阅。

@@ -5,6 +5,7 @@ title_zh: "渔港的旗语交接"
 title_en: "The Harbor's Flag Relay"
 concept: "lease-based leader election and fencing tokens"
 tags: [distributed-systems, kubernetes]
+illustration: /assets/art/2026-07-04-leader-election-fencing-token.jpg
 ---
 <section class="zh" markdown="1">
 海边有一座小渔港，港口窄，进出港的水道只容得下一条船通过。为了不让两条船同时抢道相撞，渔港立下规矩：_任何时候，只能有一位"掌旗人"站在防波堤尽头指挥进港_——他挥旗，船看旗行事，谁也不许自作主张。

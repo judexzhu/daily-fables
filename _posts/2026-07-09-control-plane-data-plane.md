@@ -5,6 +5,7 @@ title_zh: "云轨镇的调度塔"
 title_en: "The Dispatch Tower of Cloud-Rail Town"
 concept: "control plane vs data plane"
 tags: [kubernetes, networking, distributed-systems]
+illustration: /assets/art/2026-07-09-control-plane-data-plane.jpg
 ---
 <section class="zh" markdown="1">
 云轨镇建在几座山谷之间，靠一张密密麻麻的铁轨网把各个车站连起来。镇子中央立着一座_调度塔_，塔里的规划员整天研究客流、货运需求，画出今天该开哪几条线、每趟车该怎么绕道。可他们从来不会亲自跑到铁轨上去推一节车厢——他们只把画好的方案，通过一条电报线，发给散布在每个岔口的小_道岔箱_。

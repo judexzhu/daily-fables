@@ -5,6 +5,7 @@ title_zh: "烽火台的换届鼓声"
 title_en: "The Beacon Towers' Drumroll Handover"
 concept: "Raft leader election and quorum"
 tags: [distributed-systems]
+illustration: /assets/art/2026-07-14-raft-leader-election.jpg
 ---
 <section class="zh" markdown="1">
 北境长城沿线立着七座烽火台，彼此相隔不过十里，靠鼓声和火光互相联络。每晚点火示警的暗号节奏，必须由一位"总把总"统一敲定——如果七座台各按各的心思打拍子，暗号乱作一团，友军连真假烽火都分不清。所以任何时候，全境只能认一个总把总。
