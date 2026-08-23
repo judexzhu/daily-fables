@@ -6,6 +6,7 @@ title_en: "When the Bell Rings, Everyone Crosses Out a Line"
 concept: "TLB shootdown"
 tags: [linux, performance]
 illustration: /assets/art/2026-08-23-tlb-shootdown.jpg
+youtube_id: "IZrihVCY-9o"
 ---
 <section class="zh" markdown="1">
 码头边的调度大厅，每天早上七点开门。

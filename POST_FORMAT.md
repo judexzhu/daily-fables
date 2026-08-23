@@ -11,6 +11,7 @@ title_en: "<English Title>"
 concept: "<English concept name>"
 tags: [<1-3 lowercase area tags>]
 illustration: /assets/art/YYYY-MM-DD-<concept-slug>.jpg
+youtube_id: "<YouTube video ID, omit if no video>"
 ---
 <section class="zh" markdown="1">
 中文正文（不含标题行）…

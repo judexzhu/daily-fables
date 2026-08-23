@@ -9,6 +9,12 @@ layout: default
 
   {% if page.illustration %}<img class="fable-art" src="{{ page.illustration | relative_url }}" alt="Illustration: {{ page.title_en }}">{% endif %}
 
+  {% if page.youtube_id %}
+  <div class="fable-video">
+    <iframe src="https://www.youtube.com/embed/{{ page.youtube_id }}" frameborder="0" allowfullscreen loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+  </div>
+  {% endif %}
+
   <div class="lang-toggle" role="tablist">
     <button data-lang="en" aria-pressed="true">English</button>
     <button data-lang="zh" aria-pressed="false">中文</button>
