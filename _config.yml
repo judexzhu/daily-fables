@@ -1,7 +1,7 @@
 title: Daily Fables
 description: Graduate-level cloud & distributed-systems concepts, told as bilingual fables.
-url: "https://judexzhu.github.io"
-baseurl: "/daily-fables"
+url: "https://fables.day"
+baseurl: ""
 markdown: kramdown
 permalink: /:year/:month/:day/:title/
 exclude:
