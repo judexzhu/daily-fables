@@ -5,7 +5,7 @@ layout: default
 {% assign rest = site.posts | shift %}
 
 <header class="hero hero-home">
-  {% if latest.illustration %}<img class="hero-art" src="{{ latest.illustration | relative_url }}" alt="">{% endif %}
+  {% if latest.art %}<img class="hero-art" src="{{ latest.art | relative_url }}" alt="">{% endif %}
   <div class="hero-scrim"></div>
   <div class="wrap hero-body">
     <p class="kicker">
@@ -19,14 +19,14 @@ layout: default
     </p>
     <h1 class="en-only">{{ latest.title_en | default: latest.title }}</h1>
     <h1 class="zh-only zh">{{ latest.title_zh | default: latest.title }}</h1>
-    <p class="hero-sub zh-only">{{ latest.title_en }}</p>
+    <p class="hero-sub zh-only">{{ latest.title_en | default: latest.title }}</p>
     <p class="hero-actions">
       <a class="btn" href="{{ latest.url | relative_url }}">
         <span class="en-only">Read the fable</span><span class="zh-only">阅读全文</span>
       </a>
-      {% if latest.youtube_id %}
-      <a class="btn-ghost" href="https://www.youtube.com/watch?v={{ latest.youtube_id }}" target="_blank" rel="noopener">
-        <span class="en-only">▶ Cinematic fable</span><span class="zh-only">▶ 影片版</span>
+      {% if latest.video %}
+      <a class="btn-ghost" href="{{ latest.video }}">
+        <span class="en-only">▶ Cinematic film</span><span class="zh-only">▶ 影片</span>
       </a>
       {% endif %}
       <span class="concept-tag">{{ latest.concept }}</span>
@@ -47,11 +47,14 @@ layout: default
     <div class="card-grid">
       {% for post in rest limit: 6 %}
       <a class="card" href="{{ post.url | relative_url }}">
-        <span class="card-art">{% if post.illustration %}<span style="background-image:url('{{ post.illustration | relative_url }}')"></span>{% endif %}</span>
+        <span class="card-art">{% if post.art %}<span style="background-image:url('{{ post.art | relative_url }}')"></span>{% endif %}</span>
         <span class="card-meta mono">{{ post.date | date: '%Y-%m-%d' }}</span>
         <span class="card-title en-only">{{ post.title_en | default: post.title }}</span>
         <span class="card-title zh-only zh">{{ post.title_zh | default: post.title }}</span>
-        <span class="card-concept mono">{{ post.concept }}</span>
+        <span class="card-concept mono">
+          <span class="en-only">{{ post.concept }}</span>
+          <span class="zh-only">{{ post.concept_zh | default: post.concept }}</span>
+        </span>
       </a>
       {% endfor %}
     </div>
@@ -65,23 +68,14 @@ layout: default
         <span class="mono dim">{{ post.date | date: '%Y-%m-%d' }}</span>
         <span class="row-title en-only">{{ post.title_en | default: post.title }}</span>
         <span class="row-title zh-only zh">{{ post.title_zh | default: post.title }}</span>
-        <span class="row-concept mono">{{ post.concept }}</span>
+        <span class="row-concept mono">
+          <span class="en-only">{{ post.concept }}</span>
+          <span class="zh-only">{{ post.concept_zh | default: post.concept }}</span>
+        </span>
       </a>
       {% endfor %}
     </div>
   </div>
 
-  <section class="coffee">
-    <div class="coffee-inner">
-      <p class="kicker en-only">One fable, every morning</p>
-      <p class="kicker zh-only zh">每天早上，一则寓言</p>
-      <h2 class="en-only">Five minutes with your coffee, and one concept you will not forget.</h2>
-      <h2 class="zh-only zh">配一杯咖啡的五分钟，换一个你不会忘的概念。</h2>
-      <a class="bmc" href="https://buymeacoffee.com/judexzhu" target="_blank" rel="noopener">
-        <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="52">
-      </a>
-      <p class="fine en-only">Free to read, no archive gate. If a fable earned its five minutes, there is a tip jar.</p>
-      <p class="fine zh-only zh">免费阅读，全部存档不设门槛。如果这五分钟值得，这里有个打赏罐。</p>
-    </div>
-  </section>
+  {% include coffee.html %}
 </div>

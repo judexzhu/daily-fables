@@ -1,52 +1,43 @@
 ---
 layout: default
 ---
-<article class="fable-page">
-  <p class="fable-date">{{ page.date | date: "%Y-%m-%d" }}</p>
-  <h1 class="fable-title">{{ page.title_en | default: page.title }}</h1>
-  <p class="fable-title-zh">{{ page.title_zh }}</p>
-  <p class="fable-concept">concept: <span class="concept-chip">{{ page.concept }}</span></p>
+<header class="hero hero-fable">
+  {% if page.illustration %}<img class="hero-art" src="{{ page.illustration | relative_url }}" alt="Illustration: {{ page.title_en }}">{% endif %}
+  <div class="hero-scrim"></div>
+</header>
 
-  {% if page.youtube_id %}
-  <div class="fable-video">
-    <iframe src="https://www.youtube.com/embed/{{ page.youtube_id }}" frameborder="0" allowfullscreen loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-  </div>
-  <p class="fable-video-caption">▶ Cinematic fable · <a href="https://www.youtube.com/watch?v={{ page.youtube_id }}" target="_blank" rel="noopener">Watch on YouTube</a></p>
-  {% elsif page.illustration %}
-  <img class="fable-art" src="{{ page.illustration | relative_url }}" alt="Illustration: {{ page.title_en }}">
-  {% endif %}
+<div class="paper">
+  <article class="wrap article">
+    <div class="article-head">
+      <p class="kicker accent">
+        <span>{{ page.date | date: '%Y-%m-%d' }}</span>
+        <span class="rule"></span>
+        <span class="dim">{{ page.concept }}</span>
+      </p>
+      <h1 class="en-only">{{ page.title_en | default: page.title }}</h1>
+      <h1 class="zh-only zh">{{ page.title_zh | default: page.title }}</h1>
+      <p class="article-sub zh-only">{{ page.title_en }}</p>
+    </div>
 
-  <div class="lang-toggle" role="tablist">
-    <button data-lang="en" aria-pressed="true">English</button>
-    <button data-lang="zh" aria-pressed="false">中文</button>
-  </div>
+    <div class="article-body">
+      {% if page.youtube_id %}
+      <div class="fable-video">
+        <iframe src="https://www.youtube.com/embed/{{ page.youtube_id }}" frameborder="0" allowfullscreen loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+      </div>
+      <p class="fable-video-caption mono">
+        <span class="en-only">▶ Cinematic fable · <a href="https://www.youtube.com/watch?v={{ page.youtube_id }}" target="_blank" rel="noopener">Watch on YouTube</a></span>
+        <span class="zh-only">▶ 影片版寓言 · <a href="https://www.youtube.com/watch?v={{ page.youtube_id }}" target="_blank" rel="noopener">在 YouTube 观看</a></span>
+      </p>
+      {% endif %}
 
-  <div class="fable-body lang-en">
-    {{ content }}
-  </div>
+      <div class="prose">
+        {{ content }}
+      </div>
 
-  <nav class="fable-nav">
-    {% if page.next %}<a href="{{ page.next.url | relative_url }}">← {{ page.next.date | date: "%m-%d" }}</a>{% endif %}
-    {% if page.previous %}<a class="right" href="{{ page.previous.url | relative_url }}">{{ page.previous.date | date: "%m-%d" }} →</a>{% endif %}
-  </nav>
-</article>
-<script>
-(function () {
-  var body = document.querySelector('.fable-body');
-  var buttons = document.querySelectorAll('.lang-toggle button');
-  function setLang(lang) {
-    body.className = 'fable-body lang-' + lang;
-    buttons.forEach(function (b) {
-      b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
-    });
-    try { localStorage.setItem('fable-lang', lang); } catch (e) {}
-  }
-  buttons.forEach(function (b) {
-    b.addEventListener('click', function () { setLang(b.dataset.lang); });
-  });
-  var saved = 'en';
-  try { saved = localStorage.getItem('fable-lang') || 'en'; } catch (e) {}
-  if (saved !== 'zh' && saved !== 'en') saved = 'en';
-  setLang(saved);
-})();
-</script>
+      <nav class="fable-nav mono">
+        {% if page.next %}<a href="{{ page.next.url | relative_url }}">← {{ page.next.date | date: '%m-%d' }} {{ page.next.title_en | default: page.next.title | truncate: 42 }}</a>{% endif %}
+        {% if page.previous %}<a class="right" href="{{ page.previous.url | relative_url }}">{{ page.previous.title_en | default: page.previous.title | truncate: 42 }} {{ page.previous.date | date: '%m-%d' }} →</a>{% endif %}
+      </nav>
+    </div>
+  </article>
+</div>
