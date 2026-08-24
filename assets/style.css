@@ -93,7 +93,7 @@ h1, h2, h3 { font-weight: 400; }
 .hero-sub { margin: 22px 0 0; font-size: 24px; color: #b3a698; }
 .kicker {
   display: flex; align-items: center; flex-wrap: wrap; gap: 16px; margin: 0 0 30px;
-  font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--clay);
+  font-family: var(--mono); font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--clay);
 }
 .kicker.zh { font-family: var(--hand); font-size: 14px; text-transform: none; }
 .kicker .rule { width: 34px; height: 1px; background: rgba(201,160,140,0.5); }
