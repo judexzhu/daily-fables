@@ -43,7 +43,7 @@ h1, h2, h3 { font-weight: 400; }
 /* ---- language switching (drives the section.zh / section.en blocks in posts) ---- */
 [data-lang="en"] .zh-only, [data-lang="en"] .prose section.zh { display: none !important; }
 [data-lang="zh"] .en-only, [data-lang="zh"] .prose section.en { display: none !important; }
-[data-lang="zh"] .prose { font-family: var(--hand); font-size: 23px; line-height: 1.95; }
+[data-lang="zh"] .prose { font-family: var(--hand); font-size: 21px; line-height: 1.95; }
 
 /* ---- top bar ---- */
 .site-bar {
@@ -179,13 +179,13 @@ h1, h2, h3 { font-weight: 400; }
 }
 .prose hr { border: 0; border-top: 1px solid var(--line); margin: 60px 0 44px; }
 .prose h2, .prose h3 {
-  margin: 60px 0 18px; font-family: var(--mono); font-size: 11px; font-weight: 500;
-  letter-spacing: 0.18em; text-transform: uppercase; color: var(--seal);
+  margin: 60px 0 18px; font-family: var(--mono); font-size: 14px; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--seal);
 }
 /* the bold run-in headings the posts use for 这是什么 / What it is */
 .prose > section > p > strong:only-child {
-  display: block; font-family: var(--mono); font-size: 11px; font-weight: 500;
-  letter-spacing: 0.18em; text-transform: uppercase; color: var(--seal);
+  display: block; font-family: var(--mono); font-size: 14px; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--seal);
   margin-top: 24px;
 }
 /* metaphor mapping: the trailing list of "image → mechanism" pairs */
