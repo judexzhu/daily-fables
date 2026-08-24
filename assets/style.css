@@ -43,7 +43,7 @@ h1, h2, h3 { font-weight: 400; }
 /* ---- language switching (drives the section.zh / section.en blocks in posts) ---- */
 [data-lang="en"] .zh-only, [data-lang="en"] .prose section.zh { display: none !important; }
 [data-lang="zh"] .en-only, [data-lang="zh"] .prose section.en { display: none !important; }
-[data-lang="zh"] .prose { font-family: var(--hand); line-height: 1.95; }
+[data-lang="zh"] .prose { font-family: var(--hand); font-size: 23px; line-height: 1.95; }
 
 /* ---- top bar ---- */
 .site-bar {
