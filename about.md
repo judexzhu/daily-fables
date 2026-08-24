@@ -5,7 +5,7 @@ permalink: /about/
 ---
 
 <h1 class="en-only">A fable a day, and the machinery underneath it</h1>
-<h1 class="zh-only zh">一日一则寓言，以及它底下的机器</h1>
+<h1 class="zh-only zh">一日一则寓言，以及它背后的原理</h1>
 
 <div class="en-only" markdown="1">
 Every distributed-systems concept worth knowing was, at some point, a human problem first. A ledger too far from the desk. A bell that stops the room. Someone waiting for an answer that may never come.
