@@ -35,7 +35,7 @@ youtube_id: "2I38fOPw8DA"
 
 ——到这儿你大概已经认出来了：这就是 *TLB shootdown*。
 
-**这是什么**
+### 这是什么
 
 CPU 每访问一次内存，都要把虚拟地址翻译成物理地址，翻译规则存在内存里的 *page table* 里。完整走一遍（*page table walk*）要好几次访存，太慢，所以每个 CPU core 内部有一小块硬件缓存 *TLB*（Translation Lookaside Buffer），存最近用过的翻译结果。
 
@@ -43,7 +43,7 @@ CPU 每访问一次内存，都要把虚拟地址翻译成物理地址，翻译�
 
 所以失效必须由软件亲手做：发起修改的 CPU 用 *IPI*（inter-processor interrupt）打断所有可能持有旧 entry 的 CPU，让它们各自执行 `invlpg` 踢掉那一条，然后回 ack。发起方必须**等所有 ack 到齐**，才能安全地复用那个 physical frame。这整套动作就叫 TLB shootdown。
 
-**为什么重要**
+### 为什么重要
 
 它是一次同步的、跨核的、打断所有人的操作，成本随 core 数线性增长。在高核心数机器上，频繁 `munmap`、allocator 归还内存、容器内存反复伸缩的 workload，会被 shootdown 的 IPI 风暴拖垮——现象是莫名其妙的高 `system` CPU 和尾延迟抖动，而 perf 上只看到一坨 `smp_call_function_many` 和 `flush_tlb_mm_range`。Linux 的对策正是故事里那两条：用 `mm_cpumask` 只打断真正跑过这个进程的 CPU；用 *PCID / ASID* 给地址空间打标签，让 context switch 不必整表清空。
 
@@ -91,7 +91,7 @@ In time they learned two more tricks. They hung a board by the ledger-room door 
 
 — By now you've probably recognized it: this is *TLB shootdown*.
 
-**What it is**
+### What it is
 
 Every memory access a CPU makes requires translating a virtual address to a physical one, and the translation rules live in the *page table* in memory. Walking the full table (a *page table walk*) costs several memory accesses — far too slow — so each CPU core keeps a small hardware cache, the *TLB* (Translation Lookaside Buffer), holding recently used translations.
 
@@ -99,7 +99,7 @@ The crucial point: **the TLB is not kept coherent by hardware.** Data caches hav
 
 So invalidation must be done by software, by hand: the CPU making the change sends an *IPI* (inter-processor interrupt) to every CPU that might hold the stale entry, each executes `invlpg` to evict that one line, and acknowledges. The initiator must **wait for every acknowledgment** before it may safely reuse the physical frame. That whole dance is the shootdown.
 
-**Why it matters**
+### Why it matters
 
 It is a synchronous, cross-core, everybody-stop operation whose cost grows with core count. On high-core-count machines, workloads that `munmap` frequently, return memory to the OS aggressively, or repeatedly resize container memory get dragged down by IPI storms — showing up as inexplicable `system` CPU time and tail-latency jitter, with nothing in the profile but a pile of `smp_call_function_many` and `flush_tlb_mm_range`. Linux's mitigations are exactly the two tricks from the story: `mm_cpumask`, to interrupt only the CPUs that have actually run this process, and *PCID / ASID*, tagging address spaces so a context switch needn't flush the whole thing.
 

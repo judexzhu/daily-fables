@@ -40,11 +40,11 @@ illustration: /assets/art/2026-08-07-tail-latency-hedged-requests.jpg
 
 对付最慢那一道的法子，绝不能是让所有道都变慢。
 
-**这是什么**
+### 这是什么
 
 一次请求 fan out 到很多个后端（40 个 shard、40 次并行 RPC、40 个 pod），而响应必须等**全部**子请求返回才能合成——这时整体延迟等于其中**最慢**那一个的延迟。哪怕每个后端只有 1% 的概率走上慢路径，40 路并发下"至少有一路慢"的概率就接近 33%；100 路是 63%。这就是尾延迟放大（tail latency amplification）。
 
-**为什么重要**
+### 为什么重要
 
 - 在 fan-out 场景里，平均延迟（mean）几乎没有诊断价值，必须看 p99 / p99.9。用户感受到的是尾巴，不是平均。
 - 尾巴通常不是随机的，而是有结构的：共享资源竞争、后台任务（GC、compaction、日志轮转、CPU throttling）、队头阻塞、冷缓存。找结构比加机器有用。
@@ -104,7 +104,7 @@ The cure for the slowest one can never be making all of them slower.
 
 A request fans out to many backends — forty shards, forty parallel RPCs, forty pods — and the response can't be assembled until **all** the sub-requests come back. Overall latency therefore equals the latency of the **slowest** one. Even if each backend takes a slow path only 1% of the time, the chance that at least one of forty is slow is close to 33%; at a hundred, it's 63%. That's tail latency amplification.
 
-**Why it matters**
+### Why it matters
 
 - Under fan-out, mean latency has almost no diagnostic value. You need p99 / p99.9. Users feel the tail, not the average.
 - The tail is usually structured, not random: shared-resource contention, background work (GC, compaction, log rotation, CPU throttling), head-of-line blocking, cold caches. Finding the structure beats adding machines.

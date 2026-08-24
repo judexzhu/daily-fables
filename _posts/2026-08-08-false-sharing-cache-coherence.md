@@ -34,13 +34,13 @@ illustration: /assets/art/2026-08-08-false-sharing-cache-coherence.jpg
 
 ——到这儿你大概已经认出来了：第七号纸是一条 *cache line*，小满的铃是缓存一致性协议里的 invalidation，而阿栗和阿桑撞上的，是 *false sharing*（伪共享）。
 
-**这是什么**
+### 这是什么
 
 CPU 与内存之间搬运数据的最小单位，不是一个字节，也不是一个变量，而是一条 *cache line*——主流 x86_64 与 aarch64 上通常是 64 字节。每个核心有自己的 L1 缓存；同一条 cache line 可以被多个核心同时以只读方式持有，但任何核心要写它，必须先取得独占（MESI 协议里的 Exclusive / Modified），并让其余所有副本作废。
 
 false sharing 说的就是：两个线程各自读写**互不相干**的变量，而这两个变量恰好落在同一条 cache line 上。硬件的粒度是行，不是变量，于是每一次写都会打掉对方的缓存行，双方在总线上来回争夺同一行的所有权（cache line ping-pong）。
 
-**为什么重要**
+### 为什么重要
 
 - 它不产生任何错误结果，只吞吃吞吐量。逻辑对、测试全过，就是慢——而且核心越多越慢，看上去像是"多线程没有扩展性"。
 - 典型现场：并发计数器数组 `counters[thread_id]`、结构体里紧挨着的一读一写两个热字段、按线程分片却没做对齐的统计量、锁和它保护的数据挤在一起。
@@ -92,13 +92,13 @@ That month's books were, as always, correct to the last figure. They had never b
 
 — By now you have probably recognized it: sheet seven is a *cache line*, Xiaoman's bell is invalidation in a cache coherence protocol, and what Li and Sang ran into is *false sharing*.
 
-**What it is**
+### What it is
 
 The smallest unit of data moved between CPU and memory is not a byte and not a variable — it is a *cache line*, typically 64 bytes on mainstream x86_64 and aarch64. Each core has its own L1 cache. A given cache line may be held simultaneously by many cores for reading, but any core that wants to write it must first acquire exclusive ownership (Exclusive / Modified in the MESI protocol) and invalidate every other copy.
 
 False sharing is what happens when two threads read and write **completely unrelated** variables that happen to land on the same cache line. The hardware's granularity is the line, not the variable, so every write knocks out the other side's copy and the two cores bounce ownership of one line back and forth across the interconnect — cache line ping-pong.
 
-**Why it matters**
+### Why it matters
 
 - It produces no wrong answers, only lost throughput. The logic is right, the tests pass, it is simply slow — and it gets slower on machines with more cores, so it masquerades as "our threading just doesn't scale".
 - Classic sites: a `counters[thread_id]` array, two hot fields sitting adjacent in a struct where one is read-mostly and one is write-heavy, per-thread statistics sharded but not aligned, a lock packed next to the data it protects.

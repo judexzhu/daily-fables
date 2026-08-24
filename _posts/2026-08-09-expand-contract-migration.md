@@ -81,7 +81,7 @@ The fifth thing came two months later. Mei stood by the door listening for many 
 
 — By now you have probably recognised it: this is _expand–contract_ migration, also called _parallel change_.
 
-**What it is**
+### What it is
 
 The standard way to change a data structure or an interface contract without downtime. The insight is humble: you cannot swap the storage and every reader of that storage in the same instant. During a rolling update both versions of the code are running at once, and clients upgrade on their own schedule entirely. So don't perform a switch — perform an overlap:
 
