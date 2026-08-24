@@ -16,6 +16,14 @@ youtube_id: "<YouTube video ID, omit if no video>"
 <section class="zh" markdown="1">
 中文正文（不含标题行）…
 
+### 这是什么
+
+概念解释…
+
+### 为什么重要
+
+重要性说明…
+
 _隐喻对应表_
 
 - 故事元素 → 概念元素
@@ -23,22 +31,32 @@ _隐喻对应表_
 <section class="en" markdown="1">
 English body (without the title line)…
 
+### What it is
+
+Concept explanation…
+
+### Why it matters
+
+Why it matters…
+
 _Metaphor mapping_
 
 - story element → concept element
 </section>
 ```
 
-Conversion rules from fable text:
+## Writing rules
 - No 每日寓言/Daily Fable prefix in titles; don't spoil the concept term in titles.
+- Section labels (`这是什么`, `为什么重要`, `What it is`, `Why it matters`) are `### h3` headings, NOT bold text.
+- `**bold**` is for in-story emphasis only, never for section labels.
 - Mapping-table lines become markdown list items `- `, blank line before the first item.
 - `_italic_` and backtick code spans work in kramdown unchanged. Escape double quotes in front-matter strings.
 
 ## Illustration (assets/art/)
-Each fable gets one AI-generated illustration, same filename stem as the post, generated via the `nanobanana` MCP `generate_image` tool (Gemini image model). Generate it once — don't iterate or regenerate to pick a favorite.
+Each fable gets one AI-generated illustration, same filename stem as the post, generated via the `nanobanana` MCP `generate_image` tool.
 
 - Prompt describes the STORY scene only (setting, characters, action, mood) — never the technical concept, no diagrams, no arrows, no labels, no text in the image.
-- Style: flat papercut/woodcut storybook illustration, warm palette (paper cream, warm brown ink, muted brown, terracotta/ochre accents).
-- `aspect_ratio: "16:9"`.
-- Generate to a local temp path, then compress with ImageMagick before publishing: `convert input.png -resize 800x450 -quality 65 output.jpg`, aiming for under ~60KB so the base64 payload stays small.
+- Style: Ink wash painting (水墨画). Bold dark strokes, strong contrast, wet-on-dry brushwork. Emphasize dark ink masses over pale washes.
+- `model_tier: "nb2"`, `resolution: "2k"`, `aspect_ratio: "16:9"`, `enable_grounding: false`.
+- Compress with ImageMagick: `magick input.png -resize 1920x1080 -quality 75 output.jpg`.
 - Reference in front matter: `illustration: /assets/art/<same-stem>.jpg`.
