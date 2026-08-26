@@ -45,7 +45,7 @@ layout: default
     </div>
 
     <div class="card-grid">
-      {% for post in rest limit: 6 %}
+      {% for post in rest limit: 9 %}
       <a class="card" href="{{ post.url | relative_url }}">
         <span class="card-art">{% if post.illustration %}<span style="background-image:url('{{ post.illustration | relative_url }}')"></span>{% endif %}</span>
         <span class="card-meta mono">{{ post.date | date: '%Y-%m-%d' }}</span>
@@ -60,7 +60,7 @@ layout: default
       <h2><span class="en-only">Earlier</span><span class="zh-only">更早</span></h2>
     </div>
     <div class="row-list">
-      {% for post in rest offset: 6 %}
+      {% for post in rest offset: 9 %}
       <a class="row" href="{{ post.url | relative_url }}">
         <span class="row-thumb">{% if post.illustration %}<img src="{{ post.illustration | relative_url }}" alt="" loading="lazy">{% endif %}</span>
         <span class="mono dim">{{ post.date | date: '%Y-%m-%d' }}</span>
