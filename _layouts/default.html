@@ -7,6 +7,16 @@
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','{{ site.google_analytics }}');</script>{% endif %}
 <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
 <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | truncate: 160 }}">
+<meta property="og:title" content="{% if page.title_en %}{{ page.title_en }}{% elsif page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+<meta property="og:description" content="{{ page.excerpt | default: site.description | strip_html | truncate: 200 }}">
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+<meta property="og:site_name" content="{{ site.title }}">
+<meta property="og:type" content="{% if page.layout == 'fable' %}article{% else %}website{% endif %}">
+{% if page.illustration %}<meta property="og:image" content="{{ page.illustration | absolute_url }}">{% else %}<meta property="og:image" content="{{ '/assets/seal.png' | absolute_url }}">{% endif %}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{% if page.title_en %}{{ page.title_en }}{% elsif page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+<meta name="twitter:description" content="{{ page.excerpt | default: site.description | strip_html | truncate: 200 }}">
+{% if page.illustration %}<meta name="twitter:image" content="{{ page.illustration | absolute_url }}">{% endif %}
 <link rel="icon" href="{{ '/assets/favicon.ico' | relative_url }}" sizes="any">
 <link rel="apple-touch-icon" href="{{ '/assets/apple-touch-icon.png' | relative_url }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
