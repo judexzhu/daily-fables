@@ -54,7 +54,7 @@ h1, h2, h3 { font-weight: 400; }
 }
 .bar-inner { height: 64px; display: flex; align-items: center; gap: 40px; }
 .wordmark { display: flex; align-items: center; gap: 10px; color: var(--lit); font-size: 20px; }
-.wordmark-seal { width: 24px; height: 24px; flex-shrink: 0; align-self: center; vertical-align: middle; }
+.wordmark-seal { width: 22px; height: 22px; flex-shrink: 0; margin-top: 1px; }
 .wordmark:hover { color: var(--lit); }
 .wordmark .mark-zh { font-family: var(--hand); font-size: 16px; color: var(--dim); }
 .site-nav { flex: 1; display: flex; gap: 28px; }
