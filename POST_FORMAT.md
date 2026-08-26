@@ -56,7 +56,7 @@ _Metaphor mapping_
 Each fable gets one AI-generated illustration, same filename stem as the post, generated via the `nanobanana` MCP `generate_image` tool.
 
 - Prompt describes the STORY scene only (setting, characters, action, mood) — never the technical concept, no diagrams, no arrows, no labels, no text in the image.
-- Style: Ink wash painting (水墨画). Bold dark strokes, strong contrast, wet-on-dry brushwork. Emphasize dark ink masses over pale washes.
+- Style: Ink wash painting (水墨画) with 点睛之笔 color accents. Predominantly monochrome with selective vermillion red. Bold dark strokes, strong contrast, wet-on-dry brushwork. Male characters wear wuxia (武侠) style hanfu. Female characters wear elegant flowing Tang Dynasty dress (飘逸唐装).
 - `model_tier: "nb2"`, `resolution: "2k"`, `aspect_ratio: "16:9"`, `enable_grounding: false`.
 - Compress with ImageMagick: `magick input.png -resize 1920x1080 -quality 75 output.jpg`.
 - Reference in front matter: `illustration: /assets/art/<same-stem>.jpg`.
