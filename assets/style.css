@@ -52,10 +52,12 @@ h1, h2, h3 { font-weight: 400; }
   backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(240,223,210,0.13);
 }
-.bar-inner { height: 64px; display: flex; align-items: center; gap: 40px; }
-.wordmark { display: flex; align-items: baseline; gap: 10px; color: var(--lit); font-size: 20px; }
+.bar-inner { height: 76px; display: flex; align-items: center; gap: 40px; }
+.wordmark { display: flex; align-items: center; gap: 14px; color: var(--lit); font-size: 22px; }
 .wordmark:hover { color: var(--lit); }
-.wordmark .mark-zh { font-family: var(--hand); font-size: 16px; color: var(--dim); }
+.wordmark .mark-zh { font-family: var(--hand); font-size: 17px; color: var(--dim); }
+.seal-mark { width: 34px; height: 34px; display: block; flex: none; opacity: 0.94; transition: opacity 200ms; }
+.wordmark:hover .seal-mark { opacity: 1; }
 .site-nav { flex: 1; display: flex; gap: 28px; }
 .site-nav a {
   font-family: var(--mono); font-size: 11px; letter-spacing: 0.13em; text-transform: uppercase;
@@ -192,8 +194,18 @@ h1, h2, h3 { font-weight: 400; }
 .prose ul li em { font-style: normal; font-family: var(--mono); font-size: 0.82em; color: var(--ink); }
 .prose ul li code { background: transparent; padding: 0; }
 
+.colophon {
+  margin-top: 76px;
+  display: flex; justify-content: flex-end; align-items: center; gap: 20px;
+}
+.colophon > span {
+  display: flex; flex-direction: column; align-items: flex-end; gap: 6px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--dim-2);
+}
+.colophon img { width: 64px; height: 64px; display: block; flex: none; }
 .fable-nav {
-  display: flex; justify-content: space-between; gap: 24px; margin-top: 72px;
+  display: flex; justify-content: space-between; gap: 24px; margin-top: 40px;
   border-top: 1px solid var(--line); padding-top: 26px; letter-spacing: 0.08em;
 }
 .fable-nav a { color: #7a6f64; transition: color 180ms; }
@@ -275,4 +287,6 @@ h1, h2, h3 { font-weight: 400; }
   .row-concept { text-align: left; }
   .step { grid-template-columns: 1fr; gap: 10px; }
   .coffee { padding: 72px 22px; }
+  .seal-mark { width: 26px; height: 26px; }
+  .colophon img { width: 52px; height: 52px; }
 }

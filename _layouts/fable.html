@@ -34,6 +34,14 @@ layout: default
         {{ content }}
       </div>
 
+      <div class="colophon">
+        <span>
+          <span class="en-only">Daily Fables</span><span class="zh-only">每日寓言</span>
+          <span class="dim">{{ page.date | date: '%Y-%m-%d' }}</span>
+        </span>
+        <img src="{{ '/assets/seal.png' | relative_url }}" alt="">
+      </div>
+
       <nav class="fable-nav mono">
         {% if page.next %}<a href="{{ page.next.url | relative_url }}">← {{ page.next.date | date: '%m-%d' }} {{ page.next.title_en | default: page.next.title | truncate: 42 }}</a>{% endif %}
         {% if page.previous %}<a class="right" href="{{ page.previous.url | relative_url }}">{{ page.previous.title_en | default: page.previous.title | truncate: 42 }} {{ page.previous.date | date: '%m-%d' }} →</a>{% endif %}
