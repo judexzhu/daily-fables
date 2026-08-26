@@ -6,6 +6,7 @@ title_en: "The Matchmaker's Rule"
 concept: "Saga pattern"
 tags: [distributed-systems, microservices]
 illustration: /assets/art/2026-08-26-saga-pattern.jpg
+youtube_id: "GoJkwoizifo"
 ---
 <section class="zh" markdown="1">
 镇上有个出了名的红娘，叫阿绣。
