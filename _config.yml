@@ -4,5 +4,7 @@ url: "https://fables.day"
 baseurl: ""
 markdown: kramdown
 permalink: /:year/:month/:day/:title/
+plugins:
+  - jekyll-sitemap
 exclude:
   - README.md
