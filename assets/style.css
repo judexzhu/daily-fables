@@ -52,12 +52,10 @@ h1, h2, h3 { font-weight: 400; }
   backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(240,223,210,0.13);
 }
-.bar-inner { height: 76px; display: flex; align-items: center; gap: 40px; }
-.wordmark { display: flex; align-items: center; gap: 14px; color: var(--lit); font-size: 22px; }
+.bar-inner { height: 64px; display: flex; align-items: center; gap: 40px; }
+.wordmark { display: flex; align-items: baseline; gap: 10px; color: var(--lit); font-size: 20px; }
 .wordmark:hover { color: var(--lit); }
-.wordmark .mark-zh { font-family: var(--hand); font-size: 17px; color: var(--dim); }
-.seal-mark { width: 34px; height: 34px; display: block; flex: none; opacity: 0.94; transition: opacity 200ms; }
-.wordmark:hover .seal-mark { opacity: 1; }
+.wordmark .mark-zh { font-family: var(--hand); font-size: 16px; color: var(--dim); }
 .site-nav { flex: 1; display: flex; gap: 28px; }
 .site-nav a {
   font-family: var(--mono); font-size: 11px; letter-spacing: 0.13em; text-transform: uppercase;
