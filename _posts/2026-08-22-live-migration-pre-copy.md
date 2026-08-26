@@ -6,6 +6,7 @@ title_en: "Moving the Teahouse While the Guests Are Still Drinking"
 concept: "Live migration (pre-copy with dirty page tracking)"
 tags: [virtualization, linux, kubernetes]
 illustration: /assets/art/2026-08-22-live-migration-pre-copy.jpg
+youtube_id: "tOFn6sZ7JxM"
 ---
 <section class="zh" markdown="1">
 德兴茶楼开在城南的窄街上，四十年没歇过一天。街对面新起了一座楼，梁更粗、地基更稳、后院还能拴马。掌柜老雷决定搬过去。
