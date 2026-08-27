@@ -13,6 +13,9 @@
 <meta property="og:url" content="{{ page.url | absolute_url }}">
 <meta property="og:site_name" content="{{ site.title }}">
 <meta property="og:type" content="{% if page.layout == 'fable' %}article{% else %}website{% endif %}">
+{% if page.layout == 'fable' %}<meta property="article:author" content="Jude Zhu">
+<meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+<meta name="author" content="Jude Zhu">{% endif %}
 {% if page.illustration %}<meta property="og:image" content="{{ page.illustration | absolute_url }}">{% else %}<meta property="og:image" content="{{ '/assets/seal.png' | absolute_url }}">{% endif %}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{% if page.title_en %}{{ page.title_en }}{% elsif page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
