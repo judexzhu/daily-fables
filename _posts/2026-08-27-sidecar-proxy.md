@@ -6,6 +6,7 @@ title_en: "The Person Standing at Every Shop Door"
 concept: "Sidecar proxy (service mesh data path)"
 tags: [networking, kubernetes, microservices]
 illustration: /assets/art/2026-08-27-sidecar-proxy.jpg
+youtube_id: "pXrRZuIUMUs"
 ---
 <section class="zh" markdown="1">
 长安城西市有两百多家铺子，卖丝绸的、打铁的、磨镜的、卖茶的，各自做各自的生意。铺子和铺子之间经常要通货——绸缎铺需要铁匠的扣环，铁匠需要磨镜匠的砂，磨镜匠需要茶铺的水。以前都是掌柜亲自出门送货、收款、讲价。
