@@ -6,6 +6,7 @@ title_en: "The Porcelain Allowance"
 concept: "Error budget (SLO-based reliability target)"
 tags: [sre, distributed-systems]
 illustration: /assets/art/2026-08-28-error-budget.jpg
+youtube_id: "owboBIMvucs"
 ---
 <section class="zh" markdown="1">
 清河镇上有一家瓷器行，掌柜姓陶，做了三十年生意。他家的碗碟从窑口运到铺面，中间隔着六十里山路、两段水路、三次装卸。每一百件里总有几件碎在路上。
