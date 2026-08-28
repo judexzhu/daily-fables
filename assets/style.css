@@ -264,8 +264,12 @@ h1, h2, h3 { font-weight: 400; }
 
 /* ---- gallery ---- */
 .gallery-wrap { background: var(--ink); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 0; }
-.gallery-slide { width: 80%; cursor: pointer; }
+.gallery-slide { width: 80%; position: relative; }
 .gallery-slide img { width: 100%; height: auto; display: block; filter: saturate(0.92); }
+.gallery-arrow { position: absolute; top: 50%; transform: translateY(-50%); appearance: none; border: 0; background: rgba(18,16,14,0.5); color: rgba(240,223,210,0.7); font-size: 36px; padding: 16px 12px; cursor: pointer; transition: all 200ms; z-index: 2; }
+.gallery-arrow:hover { background: rgba(18,16,14,0.8); color: var(--lit); }
+.gallery-arrow-left { left: 0; }
+.gallery-arrow-right { right: 0; }
 .gallery-caption { margin-top: 20px; text-align: center; color: var(--dim); font-size: 17px; line-height: 1.5; }
 .gallery-caption a { color: var(--lit); }
 .gallery-caption a:hover { color: var(--seal); }
