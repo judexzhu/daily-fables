@@ -157,6 +157,12 @@ h1, h2, h3 { font-weight: 400; }
 .row-concept { text-align: right; color: #7a6f64; text-transform: uppercase; }
 .row-hidden { display: none !important; }
 .load-more-wrap { display: flex; justify-content: center; padding: 32px 0 0; }
+.load-more-wrap button {
+  padding: 13px 28px; border: 1px solid var(--line); background: transparent; color: var(--muted);
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  cursor: pointer; transition: all 200ms;
+}
+.load-more-wrap button:hover { border-color: var(--seal); color: var(--seal); }
 
 /* ---- fable article ---- */
 .article { max-width: 940px; margin: 0 auto; }
