@@ -7,5 +7,6 @@ permalink: /:year/:month/:day/:title/
 google_analytics: "G-9Z0QW6PXB7"
 plugins:
   - jekyll-sitemap
+  - jekyll-feed
 exclude:
   - README.md
