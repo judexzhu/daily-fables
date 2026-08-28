@@ -53,6 +53,7 @@
       <a href="{{ site.posts.first.url | relative_url }}"><span class="en-only">The fable</span><span class="zh-only">本篇</span></a>
       <a href="{{ '/concepts/' | relative_url }}"><span class="en-only">Concepts</span><span class="zh-only">概念</span></a>
       <a href="{{ '/about/' | relative_url }}"><span class="en-only">About</span><span class="zh-only">关于</span></a>
+      <a href="#" id="random-fable"><span class="en-only">Random</span><span class="zh-only">随机</span></a>
     </nav>
     <div class="lang-switch" role="group" aria-label="Language">
       <button type="button" data-set-lang="en">EN</button>
@@ -91,6 +92,14 @@
     if (b) { set(b.dataset.setLang); }
   });
   set(root.getAttribute('data-lang') || 'en');
+})();
+(function () {
+  var posts = [{% for post in site.posts %}"{{ post.url | relative_url }}"{% unless forloop.last %},{% endunless %}{% endfor %}];
+  var btn = document.getElementById('random-fable');
+  if (btn) btn.addEventListener('click', function (e) {
+    e.preventDefault();
+    window.location.href = posts[Math.floor(Math.random() * posts.length)];
+  });
 })();
 </script>
 </body>
