@@ -6,6 +6,7 @@ title_en: "The Sacks That Never Touched the Ground"
 concept: "Zero-copy I/O"
 tags: [linux, networking, storage]
 illustration: /assets/art/2026-08-20-zero-copy-io.jpg
+youtube_id: "JSosAtfQdsc"
 ---
 <section class="zh" markdown="1">
 清河码头的规矩，四十年没变过。
