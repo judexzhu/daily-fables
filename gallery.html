@@ -3,11 +3,13 @@ layout: default
 title: Gallery
 ---
 <div class="gallery-wrap">
-  <div class="gallery-slide" id="gallery-slide">
-    <button class="gallery-arrow gallery-arrow-left" id="gallery-prev" aria-label="Previous">‹</button>
-    <img id="gallery-img" src="" alt="">
-    <button class="gallery-arrow gallery-arrow-right" id="gallery-next" aria-label="Next">›</button>
-    <div class="gallery-caption" id="gallery-caption"></div>
+  <div class="gallery-stage">
+    <button class="gallery-btn" id="gallery-prev" aria-label="Previous">←</button>
+    <div class="gallery-slide" id="gallery-slide">
+      <img id="gallery-img" src="" alt="">
+      <div class="gallery-caption" id="gallery-caption"></div>
+    </div>
+    <button class="gallery-btn" id="gallery-next" aria-label="Next">→</button>
   </div>
 </div>
 
