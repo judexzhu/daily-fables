@@ -59,9 +59,9 @@ layout: default
     <div class="section-head section-head-tight">
       <h2><span class="en-only">Earlier</span><span class="zh-only">更早</span></h2>
     </div>
-    <div class="row-list">
+    <div class="row-list" id="earlier-list">
       {% for post in rest offset: 9 %}
-      <a class="row" href="{{ post.url | relative_url }}">
+      <a class="row{% if forloop.index > 20 %} row-hidden{% endif %}" href="{{ post.url | relative_url }}">
         <span class="row-thumb">{% if post.illustration %}<img src="{{ post.illustration | relative_url }}" alt="" loading="lazy">{% endif %}</span>
         <span class="mono dim">{{ post.date | date: '%Y-%m-%d' }}</span>
         <span class="row-title en-only">{{ post.title_en | default: post.title }}</span>
@@ -70,6 +70,29 @@ layout: default
       </a>
       {% endfor %}
     </div>
+    {% assign earlier_count = rest.size | minus: 9 %}
+    {% if earlier_count > 20 %}
+    <div class="load-more-wrap">
+      <button class="btn-ghost" id="load-more">
+        <span class="en-only">Show more</span><span class="zh-only">显示更多</span>
+      </button>
+    </div>
+    <script>
+    (function () {
+      var btn = document.getElementById('load-more');
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        var hidden = document.querySelectorAll('#earlier-list .row-hidden');
+        for (var i = 0; i < Math.min(20, hidden.length); i++) {
+          hidden[i].classList.remove('row-hidden');
+        }
+        if (document.querySelectorAll('#earlier-list .row-hidden').length === 0) {
+          btn.parentElement.style.display = 'none';
+        }
+      });
+    })();
+    </script>
+    {% endif %}
   </div>
 
   <section class="coffee">
