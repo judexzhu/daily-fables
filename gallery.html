@@ -1,0 +1,49 @@
+---
+layout: default
+title: Gallery
+---
+<div class="gallery-wrap">
+  <div class="gallery-slide" id="gallery-slide">
+    <img id="gallery-img" src="" alt="">
+    <div class="gallery-caption" id="gallery-caption"></div>
+  </div>
+  <div class="gallery-controls">
+    <button id="gallery-prev" class="gallery-btn" aria-label="Previous">←</button>
+    <span class="gallery-counter mono dim" id="gallery-counter"></span>
+    <button id="gallery-next" class="gallery-btn" aria-label="Next">→</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  var fables = [
+    {% for post in site.posts %}{% if post.illustration %}
+    { url: "{{ post.illustration | relative_url }}", title: "{{ post.title_en | default: post.title | escape }}", concept: "{{ post.concept | escape }}", link: "{{ post.url | relative_url }}", date: "{{ post.date | date: '%Y-%m-%d' }}" }{% unless forloop.last %},{% endunless %}
+    {% endif %}{% endfor %}
+  ];
+  for (var i = fables.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = fables[i]; fables[i] = fables[j]; fables[j] = t;
+  }
+  var idx = 0;
+  var img = document.getElementById('gallery-img');
+  var caption = document.getElementById('gallery-caption');
+  var counter = document.getElementById('gallery-counter');
+  function show(i) {
+    idx = (i + fables.length) % fables.length;
+    var f = fables[idx];
+    img.src = f.url;
+    img.alt = f.title;
+    caption.innerHTML = '<a href="' + f.link + '"><strong>' + f.title + '</strong></a><br><span class="mono dim">' + f.date + ' · ' + f.concept + '</span>';
+    counter.textContent = (idx + 1) + ' / ' + fables.length;
+  }
+  show(0);
+  document.getElementById('gallery-prev').addEventListener('click', function () { show(idx - 1); });
+  document.getElementById('gallery-next').addEventListener('click', function () { show(idx + 1); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') show(idx - 1);
+    if (e.key === 'ArrowRight') show(idx + 1);
+  });
+  img.addEventListener('click', function () { show(idx + 1); });
+})();
+</script>
