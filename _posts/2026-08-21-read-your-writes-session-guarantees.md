@@ -6,6 +6,7 @@ title_en: "Old Qin's Bamboo Tally"
 concept: "Session guarantees (read-your-writes, monotonic reads)"
 tags: [distributed-systems, kubernetes]
 illustration: /assets/art/2026-08-21-read-your-writes-session-guarantees.jpg
+youtube_id: "7qA5nz8oooY"
 ---
 <section class="zh" markdown="1">
 榕树村只有一面"正墙"——祠堂后头那面白灰墙。全村的告示都写在那儿：谁家丢了羊、圩期改到哪天、地界怎么分。可村子铺得散，从最远的西塘走到祠堂要一个半时辰，老人们走不动。
