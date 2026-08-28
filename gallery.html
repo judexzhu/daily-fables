@@ -25,14 +25,12 @@ title: Gallery
   var idx = 0;
   var img = document.getElementById('gallery-img');
   var caption = document.getElementById('gallery-caption');
-  var counter = document.getElementById('gallery-counter');
   function show(i) {
     idx = (i + fables.length) % fables.length;
     var f = fables[idx];
     img.src = f.url;
     img.alt = f.title;
     caption.innerHTML = '<a href="' + f.link + '"><strong>' + f.title + '</strong></a><br><span class="mono dim">' + f.date + ' · ' + f.concept + '</span>';
-    counter.textContent = (idx + 1) + ' / ' + fables.length;
   }
   show(0);
   document.getElementById('gallery-prev').addEventListener('click', function () { show(idx - 1); });
