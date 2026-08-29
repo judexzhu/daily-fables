@@ -6,6 +6,7 @@ title_en: "The First Bowl"
 concept: "Canary deployment (progressive rollout)"
 tags: [ci-cd, sre, kubernetes]
 illustration: /assets/art/2026-08-29-canary-deployment.jpg
+youtube_id: "SxPK1dqrRlU"
 ---
 <section class="zh" markdown="1">
 清河镇的面馆叫"老周家"，传了三代，靠的就是一碗红汤牛肉面。卤水的配方写在一本油渍斑驳的册子上，谁也不许改动一个字。
