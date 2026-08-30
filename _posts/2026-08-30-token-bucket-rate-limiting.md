@@ -6,6 +6,7 @@ title_en: "Coins in the Bamboo Tube"
 concept: "Token bucket rate limiting"
 tags: [distributed-systems, networking, sre]
 illustration: /assets/art/2026-08-30-token-bucket-rate-limiting.jpg
+youtube_id: "T9UNZPc20Vk"
 ---
 <section class="zh" markdown="1">
 清河镇最热闹的渡口叫"三板桥"。每天清早，上游的货船、渔船、客船挤在河湾里等过闸。闸口窄，一次只能过一条船，要是不管不顾全放进来，船挤船、篙碰篙，轻则刮漆，重则翻船。
