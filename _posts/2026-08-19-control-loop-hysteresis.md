@@ -6,6 +6,7 @@ title_en: "The Stove and the Window"
 concept: "Control-Loop Oscillation and Hysteresis"
 tags: [kubernetes, distributed-systems, linux]
 illustration: /assets/art/2026-08-19-control-loop-hysteresis.jpg
+youtube_id: "FJW8S58NgCA"
 ---
 <section class="zh" markdown="1">
 天还没亮，城南澡堂的新伙计小满就接了班。
