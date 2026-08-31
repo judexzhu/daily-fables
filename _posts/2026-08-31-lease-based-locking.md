@@ -6,6 +6,7 @@ title_en: "The Lantern Lease"
 concept: "Lease-based distributed locking"
 tags: [distributed-systems, kubernetes, sre]
 illustration: /assets/art/2026-08-31-lease-based-locking.jpg
+youtube_id: "nu7_Ol2z4BA"
 ---
 <section class="zh" markdown="1">
 南塘镇只有一盏夜灯。
