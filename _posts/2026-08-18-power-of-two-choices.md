@@ -6,6 +6,7 @@ title_en: "One More Glance on the Night Market Street"
 concept: "The Power of Two Random Choices"
 tags: [distributed-systems, networking]
 illustration: /assets/art/2026-08-18-power-of-two-choices.jpg
+youtube_id: "5mf5CkzsElA"
 ---
 <section class="zh" markdown="1">
 入夜，长街两侧亮起三十盏灯——三十家面摊，三十口锅，三十条队。
