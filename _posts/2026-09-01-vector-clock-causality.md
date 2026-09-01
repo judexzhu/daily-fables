@@ -6,6 +6,7 @@ title_en: "Everyone Keeps Their Own Ledger"
 concept: "Vector clocks and causal ordering"
 tags: [distributed-systems, networking]
 illustration: /assets/art/2026-09-01-vector-clock-causality.jpg
+youtube_id: "OjX1J4vRMIw"
 ---
 <section class="zh" markdown="1">
 青瓦镇有三家药铺——东街的仁和堂、南巷的济世坊、西坡的同春号。三家各有各的药柜，各有各的客人，但有些方子需要三家合开：仁和堂出白术，济世坊出茯苓，同春号出甘草，凑齐了才能抓一副完整的药。
