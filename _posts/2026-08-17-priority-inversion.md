@@ -6,6 +6,7 @@ title_en: "The Only Bucket at the Well"
 concept: "Priority Inversion (and Priority Inheritance)"
 tags: [linux, distributed-systems]
 illustration: /assets/art/2026-08-17-priority-inversion.jpg
+youtube_id: "9XtyhhDroqA"
 ---
 <section class="zh" markdown="1">
 天刚亮，山村的井台上还没人。小徒弟阿禾第一个到，把那只木桶挂上绳钩，一圈一圈往下放。
