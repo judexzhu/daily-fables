@@ -6,6 +6,7 @@ title_en: "The Miller's Tally Peg"
 concept: "Optimistic Concurrency Control"
 tags: [distributed-systems, kubernetes, databases]
 illustration: /assets/art/2026-08-16-optimistic-concurrency-control.jpg
+youtube_id: "dDSbQlUMEms"
 ---
 <section class="zh" markdown="1">
 溪水推着石磨转了一百年，磨坊里最要紧的东西却不是那块磨盘，而是柜台上那本厚账簿。
