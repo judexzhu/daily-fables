@@ -6,6 +6,7 @@ title_en: "The Rule of Compartments"
 concept: "Bulkhead pattern"
 tags: [distributed-systems, sre]
 illustration: /assets/art/2026-09-02-bulkhead-pattern.jpg
+youtube_id: "1pTi0DdPN2U"
 ---
 <section class="zh" markdown="1">
 南河上跑着一种老式的木货船，船身宽，吃水深，一趟能装几千斤米粮。
