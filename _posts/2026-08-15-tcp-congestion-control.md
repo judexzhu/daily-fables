@@ -6,6 +6,7 @@ title_en: "The Mule Trains of Blackwater Pass"
 concept: "TCP congestion control (slow start, AIMD, bufferbloat)"
 tags: [networking, distributed-systems]
 illustration: /assets/art/2026-08-15-tcp-congestion-control.jpg
+youtube_id: "gli_46P1St4"
 ---
 <section class="zh" markdown="1">
 黑水岭上只有一道隘口，窄得两匹骡子并肩走就要擦着石壁。岭这边是产茶的六个村子，岭那边是集市。谁也没量过那道口子一天究竟能过多少骡子——山里雾大，隘口终年藏在云里，没有人站得那么高、看得那么全。
