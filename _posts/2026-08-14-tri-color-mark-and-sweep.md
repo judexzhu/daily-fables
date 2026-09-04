@@ -6,6 +6,7 @@ title_en: "The Steward Who Tied Ribbons"
 concept: "Tri-color mark-and-sweep garbage collection"
 tags: [runtime, memory]
 illustration: /assets/art/2026-08-14-tri-color-mark-and-sweep.jpg
+youtube_id: "17fSvopmqE4"
 ---
 <section class="zh" markdown="1">
 老宅有四十七个房间，住了三代人。谁也说不清楼上东厢那只樟木箱是谁的、还有没有人要。管家默里先生每年秋天清一次屋子。
