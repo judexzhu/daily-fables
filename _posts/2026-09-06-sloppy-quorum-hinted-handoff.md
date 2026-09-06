@@ -6,6 +6,7 @@ title_en: "The Borrowed Seals of Quicksand Outpost"
 concept: "Sloppy Quorum and Hinted Handoff"
 tags: [storage, distributed-systems]
 illustration: /assets/art/2026-09-06-sloppy-quorum-hinted-handoff.jpg
+youtube_id: "ycv4FC3Mp78"
 ---
 <section class="zh" markdown="1">
 大漠古道八百里，流沙蔽日。朝廷在古道沿途依水草设立了许多驿站，专管替往来商队转运贵重的贡茶、细绢与官银。
