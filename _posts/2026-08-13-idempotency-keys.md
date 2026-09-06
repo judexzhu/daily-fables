@@ -6,6 +6,7 @@ title_en: "The Brass Hooks at the Lantern Inn"
 concept: "Idempotency Keys and Exactly-Once Effects"
 tags: [distributed-systems, kubernetes]
 illustration: /assets/art/2026-08-13-idempotency-keys.jpg
+youtube_id: "Fnlk4k8w9Jw"
 ---
 <section class="zh" markdown="1">
 雨下了整夜。灯笼客栈后厨的窗口只开了一条缝，跑腿的孩子们一个接一个从雨里冒出来，把湿透的纸条塞进去。
