@@ -6,6 +6,7 @@ title_en: "The Sinking Storehouse"
 concept: "Linux OOM Killer and oom_score_adj"
 tags: [linux, memory, kubernetes]
 illustration: /assets/art/2026-09-07-linux-oom-killer.jpg
+youtube_id: "FSD2gh8g0V0"
 ---
 <section class="zh" markdown="1">
 云岩山下的官栈，建在一片架空的粗大石梁与硬木悬桩之上。栈房三面环谷，脚下是奔流的浊水。
