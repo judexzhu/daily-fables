@@ -6,3 +6,6 @@ media/
 scripts/
 .DS_Store
 .claude/
+.mcp.json
+client_secrets.json
+request.token
