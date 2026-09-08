@@ -6,7 +6,7 @@ title_en: "The Night Porter's Ring of Keys"
 concept: "The Confused Deputy Problem"
 tags: [security, aws, kubernetes]
 illustration: /assets/art/2026-08-11-confused-deputy-problem.jpg
-youtube_id: "dpO8ZZNwaNk"
+youtube_id: "zHAxVw-qL7E"
 ---
 <section class="zh" markdown="1">
 长风客栈的夜班门房姓周，掌灯以后，整座楼就归他管。
