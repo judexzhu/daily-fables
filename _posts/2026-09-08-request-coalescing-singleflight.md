@@ -6,6 +6,7 @@ title_en: "The Copper Ring at the Dragon Tongue Well"
 concept: "Request Coalescing (Singleflight)"
 tags: [distributed-systems, performance, microservices]
 illustration: /assets/art/2026-09-08-request-coalescing-singleflight.jpg
+youtube_id: "oA6h4jiP67U"
 ---
 <section class="zh" markdown="1">
 青岩镇北的绝壁下，有一眼名传百里的深井，名唤龙舌井。
