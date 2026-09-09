@@ -6,6 +6,7 @@ title_en: "The Bound Envelope in the Granary Ledger"
 concept: "The Transactional Outbox Pattern"
 tags: [microservices, distributed-systems, databases]
 illustration: /assets/art/2026-09-09-transactional-outbox-pattern.jpg
+youtube_id: "bkZLed4Qo2c"
 ---
 <section class="zh" markdown="1">
 陇西边隘的黑石关外，有一座由朝廷设下的巨大常平仓。
