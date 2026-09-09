@@ -9,4 +9,4 @@ scripts/
 .mcp.json
 client_secrets.json
 request.token
-.pi/tasks/
+.pi/
