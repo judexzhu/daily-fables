@@ -6,6 +6,7 @@ title_en: "The Red Dot on the Back of the Tally"
 concept: "Distributed Tracing: Context Propagation and Sampling"
 tags: [observability, distributed-systems]
 illustration: /assets/art/2026-08-10-distributed-tracing-context-propagation.jpg
+youtube_id: "fa9F4oll2kE"
 ---
 <section class="zh" markdown="1">
 老城西头有家饭馆叫"三进堂"，一到掌灯时分就满得转不开身。
