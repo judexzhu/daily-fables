@@ -6,6 +6,7 @@ title_en: "The Blank Token at the Beacon Pass"
 concept: "TCP SYN Cookies: Stateless Handshake and SYN Flood Defense"
 tags: [networking, security, linux]
 illustration: /assets/art/2026-09-10-tcp-syn-cookies.jpg
+youtube_id: "FiVNXfdXJa8"
 ---
 <section class="zh" markdown="1">
 北境群山之间有一座要塞，叫烽火关。关下是一条狭长险峻的石峡，关里则是通往中原腹地的八百里通衢。
