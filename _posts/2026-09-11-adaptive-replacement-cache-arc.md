@@ -6,6 +6,7 @@ title_en: "The Ghost Ledger at the Pavilion of Literary Abundance"
 concept: "Adaptive Replacement Cache (ARC): Self-Tuning Recency and Frequency"
 tags: [storage, performance, memory]
 illustration: /assets/art/2026-09-11-adaptive-replacement-cache-arc.jpg
+youtube_id: "9UYQF8zZJ10"
 ---
 <section class="zh" markdown="1">
 京城东华门内有一座文渊阁，阁内藏天下典籍数万卷。
