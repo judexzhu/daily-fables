@@ -6,6 +6,7 @@ title_en: "The Secret Toggle in the Silk Brocade Pouch"
 concept: "OAuth 2.0 PKCE: Proof Key for Code Exchange and Authorization Code Interception Defense"
 tags: [security, identity]
 illustration: /assets/art/2026-09-13-oauth-pkce.jpg
+youtube_id: "bgu2QFgQNWg"
 ---
 <section class="zh" markdown="1">
 盛京城里有一座富甲天下的四海商行，城南则是朝廷重兵把守的官银库。
