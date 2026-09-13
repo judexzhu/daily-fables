@@ -6,6 +6,7 @@ title_en: "The Decree of the Conjoined Halls"
 concept: "Raft Joint Consensus: Safe Dynamic Cluster Membership Changes"
 tags: [distributed-systems, consensus, etcd]
 illustration: /assets/art/2026-09-12-raft-joint-consensus.jpg
+youtube_id: "4iF35r9kCO8"
 ---
 <section class="zh" markdown="1">
 乌石峡两岸有三座连环古寨，唤作白石寨、青石寨、黑石寨。三寨依山面水，共掌峡口一座巨大的平仓水闸。
