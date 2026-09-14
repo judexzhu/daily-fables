@@ -6,6 +6,7 @@ title_en: "The Hour-Long Chit at the Frontier Post"
 concept: "IRSA / OIDC federation with STS"
 tags: [aws, security, kubernetes]
 illustration: /assets/art/2026-07-03-irsa-oidc-federation.jpg
+youtube_id: "QRQ2CEF8BJQ"
 ---
 <section class="zh" markdown="1">
 在雁门关外，散布着十几处小驿站，各自看守一小段商道。驿站再往西，是朝廷设在漠北的"总粮仓"，专供紧急调粮。
