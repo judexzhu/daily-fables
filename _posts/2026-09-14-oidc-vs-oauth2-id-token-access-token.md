@@ -6,6 +6,7 @@ title_en: "The Copper Room Key and the Jade Passport"
 concept: "OIDC vs. OAuth 2.0: ID Token vs. Access Token"
 tags: [security, identity, web]
 illustration: /assets/art/2026-09-14-oidc-vs-oauth2-id-token-access-token.jpg
+youtube_id: "BPPolLtu-dM"
 ---
 <section class="zh" markdown="1">
 临安城南的四海客栈，每日往来的行商足有数百人。
