@@ -22,21 +22,29 @@ illustration: /assets/art/2026-07-03-irsa-oidc-federation.jpg
 
 ——到这儿你大概已经认出来了：这道手谕，其实是 _Kubernetes service account token_（一种 _OIDC_ 签发的 _JWT_）；挂在仓房墙上的花押拓片，是 AWS 那边预先注册好的 _OIDC identity provider_（连带它的 _JWKS_/证书指纹）；仓管事那条"字号必须分毫不差"的铁规矩，就是 IAM _trust policy_ 里对 `sub`、`aud` 的条件校验；而那张只顶一个时辰的临时领粮牌，正是调用 _sts:AssumeRoleWithWebIdentity_ 换来的_临时 STS 凭证_。
 
-_概念解释_
-这套机制在 AWS 上叫 _IRSA_（IAM Roles for Service Accounts），ROSA/OpenShift 用法类似，核心都是拿 _OIDC federation_ 替换掉长期存在 pod 里的静态 AWS access key。集群本身就是一个 _OIDC issuer_：每个 pod 的 service account 会被 kubelet 自动挂载一个短期、自动轮换的 _JWT_，里面带着 `iss`（签发者，即集群的 OIDC 地址）、`sub`（格式通常是 `system:serviceaccount:<ns>:<sa>`）、`aud`（受众，常见值是 `sts.amazonaws.com`）、`exp`（通常一小时左右过期）这几个关键 claim。AWS 侧预先把这个集群注册成一个 _IAM OIDC identity provider_，同时保存好它的证书指纹（thumbprint）——这样 STS 验证 JWT 签名时，不需要实时回调集群，只要拿本地存的公钥/指纹去验签就行，速度快、也不产生额外的信任链依赖。真正做访问控制的，是 IAM Role 的 _trust policy_ 里那条 `StringEquals` 条件，精确锁死只有哪个命名空间下、哪个 service account 签发的 token 才配换出这个角色的权限——光有效签名不够，claim 对不上照样拒绝。最后拿到的不是永久密钥，而是 `AssumeRoleWithWebIdentity` 换来的临时 _AccessKeyId/SecretAccessKey/SessionToken_ 三件套，通常一小时就过期，即便 token 或临时凭证泄露，窗口也被死死限死。这也是为什么调查 AccessDenied 时，十有八九是 `sub`/`aud` 条件写错、OIDC provider 没注册对，或者 token 已经过期。
+### 这是什么
 
-_隐喻对应表_
+这套机制在 AWS 上叫 *IRSA*（IAM Roles for Service Accounts），ROSA/OpenShift 用法类似，核心都是拿 *OIDC federation* 替换掉长期存在 pod 里的静态 AWS access key。集群本身就是一个 *OIDC issuer*：每个 pod 的 service account 会被 kubelet 自动挂载一个短期、自动轮换的 *JWT*，里面带着 `iss`（签发者，即集群的 OIDC 地址）、`sub`（格式通常是 `system:serviceaccount:<ns>:<sa>`）、`aud`（受众，常见值是 `sts.amazonaws.com`）、`exp`（通常一小时左右过期）这几个关键 claim。
 
-- 漠北总粮仓 → AWS 账户里的目标资源/角色
-- 雁门关的关主 → 集群自身的 _OIDC issuer_
-- 每日一张的手谕 → pod 的 _service account token_（短期 _JWT_）
-- 手谕上的花押 → JWT 的数字签名
-- 挂在仓房墙上的花押拓片 → AWS 里注册的 _OIDC identity provider_ 及其证书指纹（_JWKS/thumbprint_）
-- "字号必须分毫不差"的铁规矩 → IAM _trust policy_ 里对 `sub`/`aud` 的条件校验
-- 一个时辰后自动作废的手谕 → token 的短 `exp`，kubelet 自动轮换
-- 临时领粮牌 → `AssumeRoleWithWebIdentity` 换来的临时 STS 凭证
-- "偷去也只能闹一个时辰" → 短期凭证泄露后风险窗口被大幅收窄
-- 老办法里终身有效的铜钥匙 → 传统的静态 long-lived AWS access key，一旦泄露永久有效、极难收回
+AWS 侧预先把这个集群注册成一个 *IAM OIDC identity provider*，同时保存好它的证书指纹（thumbprint）——这样 STS 验证 JWT 签名时，不需要实时回调集群，只要拿本地存的公钥/指纹去验签就行，速度快、也不产生额外的信任链依赖。
+
+### 为什么重要
+
+真正做访问控制的，是 IAM Role 的 *trust policy* 里那条 `StringEquals` 条件，精确锁死只有哪个命名空间下、哪个 service account 签发的 token 才配换出这个角色的权限——光有效签名不够，claim 对不上照样拒绝。最后拿到的不是永久密钥，而是 `AssumeRoleWithWebIdentity` 换来的临时 *AccessKeyId/SecretAccessKey/SessionToken* 三件套，通常一小时就过期，即便 token 或临时凭证泄露，窗口也被死死限死。这也是为什么调查 AccessDenied 时，十有八九是 `sub`/`aud` 条件写错、OIDC provider 没注册对，或者 token 已经过期。
+
+### 隐喻对应表
+
+| 故事元素 | 计算机概念 | 技术细节与工程映射 |
+| :--- | :--- | :--- |
+| **漠北总粮仓** | AWS 目标资源 / IAM 角色 | 受保护的云端存储与服务，需要权限凭证方可访问 |
+| **雁门关的关主** | 集群自身 OIDC Issuer | 负责签发带有数字签名的短期身份凭证（JWT） |
+| **每日一张的手谕** | Pod ServiceAccount Token | 带有 `iss`、`sub`、`aud`、`exp` 的短期身份令牌 |
+| **手谕上的花押** | JWT 数字签名 | 关主私钥签名，证明手谕未被篡改伪造 |
+| **仓房墙上的花押拓片** | IAM OIDC Provider 与指纹 | AWS 本地缓存的公钥/JWKS，无需实时回调集群即可验签 |
+| **字号必须分毫不差** | Trust Policy 的 `StringEquals` | 校验 `sub` 声明必须与绑定的命名空间及 SA 完全匹配 |
+| **一个时辰后字迹褪去** | Token 短期过期时间 `exp` | Kubelet 自动轮换注入，过期即失效 |
+| **换领的临时领粮牌** | 临时 STS 凭据 | `AssumeRoleWithWebIdentity` 换取的 1 小时临时 AK/SK |
+| **终身有效的铜钥匙** | 传统的静态长期 Access Key | 过去常驻环境变量的长效凭据，一旦泄露风险巨大且难回收 |
 </section>
 <section class="en" markdown="1">
 Beyond Yanmen Pass, a string of small outposts kept watch over short stretches of trade road. Further west sat the imperial "Grand Granary," reserved for emergency grain requisitions.
@@ -53,19 +61,27 @@ Only once a chit passed both checks did the keeper hand over a _temporary grain 
 
 ——By now you've probably recognized it: that chit is a _Kubernetes service account token_ — an _OIDC_-issued _JWT_. The seal rubbing hanging on the storehouse wall is the _OIDC identity provider_ that AWS registered ahead of time (along with its _JWKS_ / certificate thumbprint). The keeper's ironclad rule that the wording must match exactly is the IAM _trust policy_'s condition check on `sub` and `aud`. And that one-hour grain token is the _temporary STS credential_ obtained by calling _sts:AssumeRoleWithWebIdentity_.
 
-_The concept, and why it matters_
-On AWS this mechanism is called _IRSA_ (IAM Roles for Service Accounts); ROSA/OpenShift use an equivalent pattern. The core idea is replacing long-lived static AWS access keys sitting in a pod with _OIDC federation_. The cluster itself acts as an _OIDC issuer_: kubelet automatically mounts each pod's service account with a short-lived, auto-rotated _JWT_ carrying key claims — `iss` (the issuer, i.e. the cluster's OIDC endpoint), `sub` (typically `system:serviceaccount:<namespace>:<service-account>`), `aud` (audience, commonly `sts.amazonaws.com`), and `exp` (usually about an hour). On the AWS side, the cluster is pre-registered as an _IAM OIDC identity provider_, along with its certificate thumbprint — so when STS verifies the JWT's signature, it doesn't need to call back to the cluster in real time; it just checks against the locally stored public key/thumbprint, which is fast and avoids extra trust-chain dependencies. The actual access control happens in the IAM role's _trust policy_, via a `StringEquals` condition that pins down exactly which namespace and service account's token may assume that role — a valid signature alone isn't enough; a claim mismatch still gets rejected. What comes back isn't a permanent key but a temporary _AccessKeyId/SecretAccessKey/SessionToken_ triple from `AssumeRoleWithWebIdentity`, typically expiring within an hour — so even if the token or the temporary credential leaks, the exposure window is tightly bounded. This is also why, nine times out of ten, an `AccessDenied` investigation traces back to a mismatched `sub`/`aud` condition, a misregistered OIDC provider, or a simply expired token.
+### What it is
 
-_Metaphor mapping_
+On AWS this mechanism is called *IRSA* (IAM Roles for Service Accounts); ROSA/OpenShift use an equivalent pattern. The core idea is replacing long-lived static AWS access keys sitting in a pod with *OIDC federation*. The cluster itself acts as an *OIDC issuer*: kubelet automatically mounts each pod's service account with a short-lived, auto-rotated *JWT* carrying key claims — `iss` (the issuer, i.e. the cluster's OIDC endpoint), `sub` (typically `system:serviceaccount:<namespace>:<service-account>`), `aud` (audience, commonly `sts.amazonaws.com`), and `exp` (usually about an hour).
 
-- The Grand Granary out west → the target AWS resource/role
-- The Pass Commander → the cluster's own _OIDC issuer_
-- The daily chit → the pod's _service account token_ (a short-lived _JWT_)
-- The seal on the chit → the JWT's digital signature
-- The seal rubbing on the storehouse wall → the _OIDC identity provider_ registered in AWS, with its _JWKS_/thumbprint
-- "The wording must match exactly" → the IAM _trust policy_'s condition check on `sub`/`aud`
-- The chit that fades after an hour → the token's short `exp`, auto-rotated by kubelet
-- The temporary grain token → the temporary STS credential from `AssumeRoleWithWebIdentity`
-- "Stolen, it can only cause trouble for an hour" → the shrunken blast radius of a leaked short-lived credential
-- The old lifetime bronze key → a traditional static, long-lived AWS access key — permanently valid once leaked, nearly impossible to revoke
+On the AWS side, the cluster is pre-registered as an *IAM OIDC identity provider*, along with its certificate thumbprint — so when STS verifies the JWT's signature, it doesn't need to call back to the cluster in real time; it just checks against the locally stored public key/thumbprint, which is fast and avoids extra trust-chain dependencies.
+
+### Why it matters
+
+The actual access control happens in the IAM role's *trust policy*, via a `StringEquals` condition that pins down exactly which namespace and service account's token may assume that role — a valid signature alone isn't enough; a claim mismatch still gets rejected. What comes back isn't a permanent key but a temporary *AccessKeyId/SecretAccessKey/SessionToken* triple from `AssumeRoleWithWebIdentity`, typically expiring within an hour — so even if the token or the temporary credential leaks, the exposure window is tightly bounded. This is also why, nine times out of ten, an `AccessDenied` investigation traces back to a mismatched `sub`/`aud` condition, a misregistered OIDC provider, or a simply expired token.
+
+### Metaphor Mapping
+
+| Story Element | Computing Concept | Technical Details & Architecture Mapping |
+| :--- | :--- | :--- |
+| **The Grand Granary out west** | Target AWS resource / IAM Role | Protected cloud storage and services requiring temporary credentials |
+| **The Pass Commander** | Cluster OIDC Issuer | Authority signing short-lived identity tokens (JWT) with its private key |
+| **The daily chit** | Pod ServiceAccount Token | Short-lived JWT containing `iss`, `sub`, `aud`, and `exp` claims |
+| **The seal on the chit** | JWT digital signature | Cryptographic signature proving the token was not forged or altered |
+| **The seal rubbing on the storehouse wall** | IAM OIDC Provider & thumbprint | Pre-registered JWKS/thumbprint cached locally in AWS for instant verification |
+| **"The wording must match exactly"** | Trust policy `StringEquals` check | Condition enforcing that `sub` matches the specific namespace and SA |
+| **The chit that fades after an hour** | Short token expiration (`exp`) | Rotated automatically by kubelet to bound the window of compromise |
+| **The temporary grain token** | Temporary STS credentials | 1-hour access credentials returned by `AssumeRoleWithWebIdentity` |
+| **The old lifetime bronze key** | Long-lived static AWS access key | High-risk credentials embedded in pods, nearly impossible to safely rotate |
 </section>
