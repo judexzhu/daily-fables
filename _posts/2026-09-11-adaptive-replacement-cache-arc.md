@@ -93,21 +93,19 @@ ARC 的核心架构由两个双向链表和两个虚拟“幽灵链表（Ghost L
 - **极低的元数据开销**：Ghost List 只保存数据项的哈希键或页号（数字节），却为调度器提供了长达一倍缓存深度的“历史悔棋视野”；
 - **工业界的黄金基准**：ARC 成为了现代高性能文件系统（如 Sun/Oracle 的 **ZFS** 内核存储池）、分布式缓存和下一代通用数据库存储引擎对抗不可预测生产负载的核心基石。
 
-### 隐喻对应表
+_隐喻对应表_
 
-| 故事元素 | 计算机概念 | 技术细节与工程映射 |
-| :--- | :--- | :--- |
-| **文渊阁长案限放一百卷书** | 物理缓存容量上限 $c$ | 快速内存（RAM）有限，能驻留的热数据总量受限 |
-| **地底取书需费半个时辰** | 慢速底层存储（SSD / HDD） | 缓存未命中（Cache Miss）时高昂的磁盘 I/O 代价 |
-| **初任掌书官的尝鲜之法** | 经典 LRU（最近最少使用） | 易受全量顺序扫描（Sequential Scan）污染致瘫痪 |
-| **次任掌书官的划正字法** | 经典 LFU（最不经常使用） | 历史热点阻碍新数据流入（Cache Pollution）且衰减复杂 |
-| **正堂案头的尝鲜架 $T_1$** | $T_1$ 驻留链表（Recent Pages） | 暂存仅被读取过一次的新数据页，占用物理内存 |
-| **正堂案头的常青架 $T_2$** | $T_2$ 驻留链表（Frequent Pages） | 存放至少读取过两次的高频数据页，占用物理内存 |
-| **中央可滑动的紫檀算筹** | 目标分割参数 $p$ | 动态权衡 Recency 与 Frequency 占用预算的浮点阈值 |
-| **案下铜筒里的两只游魂簿** | 幽灵元数据队列 $B_1$ 与 $B_2$ | 仅存 Key 不存 Payload 的 LRU 淘汰历史跟踪器 |
-| **学者借书命中尝鲜簿 $B_1$** | $B_1$ Ghost Hit（幽灵命中） | 说明工作负载偏向时效，自适应增大 $p$ 并扩容 $T_1$ |
-| **学者借书命中常青簿 $B_2$** | $B_2$ Ghost Hit（幽灵命中） | 说明工作负载偏向频次，自适应减小 $p$ 并扩容 $T_2$ |
-| **怨魂纸条越多滑动越快** | 学习步长比率因子 $\Delta p$ | 按 $|B_2|/|B_1|$ 或相反比率加速向溃败侧倾斜补偿 |
+- 文渊阁长案限放一百卷书 → 物理缓存容量上限 $c$（快速内存（RAM）有限，能驻留的热数据总量受限）
+- 地底取书需费半个时辰 → 慢速底层存储（SSD / HDD）（缓存未命中（Cache Miss）时高昂的磁盘 I/O 代价）
+- 初任掌书官的尝鲜之法 → 经典 LRU（最近最少使用）（易受全量顺序扫描（Sequential Scan）污染致瘫痪）
+- 次任掌书官的划正字法 → 经典 LFU（最不经常使用）（历史热点阻碍新数据流入（Cache Pollution）且衰减复杂）
+- 正堂案头的尝鲜架 $T_1$ → $T_1$ 驻留链表（Recent Pages）（暂存仅被读取过一次的新数据页，占用物理内存）
+- 正堂案头的常青架 $T_2$ → $T_2$ 驻留链表（Frequent Pages）（存放至少读取过两次的高频数据页，占用物理内存）
+- 中央可滑动的紫檀算筹 → 目标分割参数 $p$（动态权衡 Recency 与 Frequency 占用预算的浮点阈值）
+- 案下铜筒里的两只游魂簿 → 幽灵元数据队列 $B_1$ 与 $B_2$（仅存 Key 不存 Payload 的 LRU 淘汰历史跟踪器）
+- 学者借书命中尝鲜簿 $B_1$ → $B_1$ Ghost Hit（幽灵命中）（说明工作负载偏向时效，自适应增大 $p$ 并扩容 $T_1$）
+- 学者借书命中常青簿 $B_2$ → $B_2$ Ghost Hit（幽灵命中）（说明工作负载偏向频次，自适应减小 $p$ 并扩容 $T_2$）
+- 怨魂纸条越多滑动越快 → 学习步长比率因子 $\Delta p$（按 $）
 </section>
 
 <section class="en" markdown="1">
@@ -195,19 +193,17 @@ The intelligence of the algorithm centers on a dynamic tuning parameter **$p$ (t
 - **Minimal Metadata Overhead**: Ghost lists store only keys or hashes (a few bytes per entry), yet grant the cache a historical perspective equivalent to double the cache's physical capacity;
 - **Enterprise Foundation**: ARC is the cornerstone of high-performance file systems (most notably the **ZFS Adaptive Replacement Cache**), modern SSD controllers, and high-throughput databases operating under volatile production workloads.
 
-### Metaphor Mapping
+_Metaphor mapping_
 
-| Story Element | Computing Concept | Technical Details & Architecture Mapping |
-| :--- | :--- | :--- |
-| **Aloeswood table limited to 100 books** | Physical cache capacity $c$ | Fast physical memory (RAM) holding a finite number of data blocks |
-| **Thirty-minute vault fetch via torchlight** | Slow backing storage (Disk / Network) | Cache miss requiring an expensive round-trip to secondary storage |
-| **First archivist's rule of recency** | Classic LRU (Least Recently Used) | Susceptible to cache wipeout during full-table sequential scans |
-| **Second archivist's tally-mark rule** | Classic LFU (Least Frequently Used) | Vulnerable to stale data pollution and unresponsive to workload drift |
-| **Recent Shelf $T_1$ on the table** | Cache list $T_1$ (Recent pages) | Houses pages referenced only once recently; physically resident in RAM |
-| **Frequent Shelf $T_2$ on the table** | Cache list $T_2$ (Frequent pages) | Houses pages referenced $\ge 2$ times; physically resident in RAM |
-| **Sliding sandalwood peg** | Target partition parameter $p$ | Floating threshold dynamically sizing the target capacity of $T_1$ vs $T_2$ |
-| **Ghost Ledgers $B_1$ and $B_2$ under the table** | Virtual Ghost Lists $B_1$ and $B_2$ | Stores page keys/hashes without payloads to track eviction regret |
-| **Scholar requesting a title in $B_1$** | Hit in Ghost List $B_1$ | Workload demands recency; increments $p$ to enlarge $T_1$ allocation |
-| **Scholar requesting a title in $B_2$** | Hit in Ghost List $B_2$ | Workload demands frequency; decrements $p$ to enlarge $T_2$ allocation |
-| **Peg sliding faster when one tube is full** | Dynamic learning step size $\Delta p$ | Proportional step sizing scaled by $|B_2|/|B_1|$ or $|B_1|/|B_2|$ |
+- Aloeswood table limited to 100 books → Physical cache capacity $c$ (Fast physical memory (RAM) holding a finite number of data blocks)
+- Thirty-minute vault fetch via torchlight → Slow backing storage (Disk / Network) (Cache miss requiring an expensive round-trip to secondary storage)
+- First archivist's rule of recency → Classic LRU (Least Recently Used) (Susceptible to cache wipeout during full-table sequential scans)
+- Second archivist's tally-mark rule → Classic LFU (Least Frequently Used) (Vulnerable to stale data pollution and unresponsive to workload drift)
+- Recent Shelf $T_1$ on the table → Cache list $T_1$ (Recent pages) (Houses pages referenced only once recently; physically resident in RAM)
+- Frequent Shelf $T_2$ on the table → Cache list $T_2$ (Frequent pages) (Houses pages referenced $\ge 2$ times; physically resident in RAM)
+- Sliding sandalwood peg → Target partition parameter $p$ (Floating threshold dynamically sizing the target capacity of $T_1$ vs $T_2$)
+- Ghost Ledgers $B_1$ and $B_2$ under the table → Virtual Ghost Lists $B_1$ and $B_2$ (Stores page keys/hashes without payloads to track eviction regret)
+- Scholar requesting a title in $B_1$ → Hit in Ghost List $B_1$ (Workload demands recency; increments $p$ to enlarge $T_1$ allocation)
+- Scholar requesting a title in $B_2$ → Hit in Ghost List $B_2$ (Workload demands frequency; decrements $p$ to enlarge $T_2$ allocation)
+- Peg sliding faster when one tube is full → Dynamic learning step size $\Delta p$ (Proportional step sizing scaled by $)
 </section>

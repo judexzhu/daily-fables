@@ -95,20 +95,18 @@ youtube_id: "4iF35r9kCO8"
   Raft 论文还提出了一种简化的“单节点成员变更（Single-Server Membership Change）”——每次只增删一个节点，在数学上也能天然避免多数派重叠分裂。
   但工程实践（如 HashiCorp Raft、Apache Ratis）发现，连续执行多次单节点变更容易出现网络并发乱序导致的幽灵配置。因此，**成熟的生产级系统更倾向于联合共识（Joint Consensus）**，以换取任意多节点并行变更时的绝对严谨与确定性。
 
-### 隐喻对应表
+_隐喻对应表_
 
-| 故事元素 | 计算机概念 | 技术细节与工程映射 |
-| :--- | :--- | :--- |
-| **平仓水闸与乌石峡水道** | 分布式核心数据与关键资源 | etcd 中的分布式键值状态机与外部业务读写 |
-| **三老各自掌管的铜印** | Raft 集群节点拥有的投票权（Voter Node） | 每个节点持有的有效投票与日志确认权重 |
-| **三人中有两人落印即开闸** | 法定多数原则（Quorum / Majority） | 奇数节点集群保证仲裁决议无歧义（$N/2 + 1$） |
-| **快马送檄文因山道险阻有先有后** | 异步网络延迟与乱序交付（Network Delay） | 各节点接收并应用配置日志条目存在时差 |
-| **下堂三寨以为五取三合法开闸** | 基于新配置 $C_{\text{new}}$ 形成的独立法定多数 | 部分节点抢先切到新配置，擅自提交矛盾决议 |
-| **上游二老依旧规二人即过半闭闸** | 基于旧配置 $C_{\text{old}}$ 形成的独立法定多数 | 滞后节点仍依从旧配置，造成集群双主脑裂 |
-| **老令公设立的“双堂合议令”** | 联合配置（Joint Consensus $C_{\text{old,new}}$） | 引入包含新旧集合的过渡配置元数据条目 |
-| **新堂过半且老堂亦过半方可落印** | 联合法定多数判定（Joint Majority Rule） | 任何提交必须同时获得 $C_{\text{old}}$ 和 $C_{\text{new}}$ 多数确认 |
-| **刻石铭记方发单堂就位令** | 提交并应用纯新配置 $C_{\text{new}}$ 条目 | 确认 $C_{\text{old,new}}$ 提交持久化后，方可切换至 $C_{\text{new}}$ |
-| **十次添寨退寨再无双旗凌空** | 零停机动态成员变更（Zero-Downtime） | 任意节点的加入与驱逐在数学证明下始终安全 |
+- 平仓水闸与乌石峡水道 → 分布式核心数据与关键资源（etcd 中的分布式键值状态机与外部业务读写）
+- 三老各自掌管的铜印 → Raft 集群节点拥有的投票权（Voter Node）（每个节点持有的有效投票与日志确认权重）
+- 三人中有两人落印即开闸 → 法定多数原则（Quorum / Majority）（奇数节点集群保证仲裁决议无歧义（$N/2 + 1$））
+- 快马送檄文因山道险阻有先有后 → 异步网络延迟与乱序交付（Network Delay）（各节点接收并应用配置日志条目存在时差）
+- 下堂三寨以为五取三合法开闸 → 基于新配置 $C_{\text{new}}$ 形成的独立法定多数（部分节点抢先切到新配置，擅自提交矛盾决议）
+- 上游二老依旧规二人即过半闭闸 → 基于旧配置 $C_{\text{old}}$ 形成的独立法定多数（滞后节点仍依从旧配置，造成集群双主脑裂）
+- 老令公设立的“双堂合议令” → 联合配置（Joint Consensus $C_{\text{old,new}}$）（引入包含新旧集合的过渡配置元数据条目）
+- 新堂过半且老堂亦过半方可落印 → 联合法定多数判定（Joint Majority Rule）（任何提交必须同时获得 $C_{\text{old}}$ 和 $C_{\text{new}}$ 多数确认）
+- 刻石铭记方发单堂就位令 → 提交并应用纯新配置 $C_{\text{new}}$ 条目（确认 $C_{\text{old,new}}$ 提交持久化后，方可切换至 $C_{\text{new}}$）
+- 十次添寨退寨再无双旗凌空 → 零停机动态成员变更（Zero-Downtime）（任意节点的加入与驱逐在数学证明下始终安全）
 </section>
 
 <section class="en" markdown="1">
@@ -198,18 +196,16 @@ Cluster reconfiguration must traverse a **two-phase transition**, where the tran
   Raft also supports an alternative: "Single-Server Membership Changes" (adding or removing one server at a time, where majorities naturally overlap without a joint state).
   However, production implementations (such as HashiCorp Raft and Apache Ratis) recognize that concurrent network reorderings during back-to-back single-server changes can create subtle corner cases. Therefore, **mature enterprise engines embrace Joint Consensus** for its uncompromising determinism when modifying arbitrary subsets of nodes.
 
-### Metaphor Mapping
+_Metaphor mapping_
 
-| Story Element | Computing Concept | Technical Details & Architecture Mapping |
-| :--- | :--- | :--- |
-| **Watergate at Black Stone Gorge** | Replicated state machine / Shared resource | The core data and operations managed by the consensus cluster |
-| **Chieftains' bronze seals** | Voting member nodes in Raft cluster | Nodes with active voting rights (`Voter` status) |
-| **Two seals out of three needed to open** | Quorum / Majority rule | Simple majority required to commit logs or elect leaders ($N/2 + 1$) |
-| **Couriers delayed along cliff trails** | Asynchronous network delay & partition | Unpredictable network timing causing nodes to receive configs at different moments |
-| **Three lower fortresses claiming 3-of-5 majority** | Disjoint quorum formed under $C_{\text{new}}$ | Updated nodes forming a majority under new config and acting independently |
-| **Two upper fortresses claiming 2-of-3 majority** | Disjoint quorum formed under $C_{\text{old}}$ | Stale nodes forming a majority under old config, causing dual leaders |
-| **The Decree of the Conjoined Halls** | Joint Consensus configuration ($C_{\text{old,new}}$) | A transitional log entry binding both old and new memberships together |
-| **Must have both old and new majorities** | Joint Majority rule | Commits require separate majority approval from both $C_{\text{old}}$ and $C_{\text{new}}$ |
-| **Carving stone stelae before single-hall charter** | Committing $C_{\text{old,new}}$ before appending $C_{\text{new}}$ | Ensuring transition is immutable across cluster before shedding old configuration |
-| **Decades of additions/removals without split banners** | Zero-downtime dynamic membership change | Provably safe online reconfiguration without stopping production services |
+- Watergate at Black Stone Gorge → Replicated state machine / Shared resource (The core data and operations managed by the consensus cluster)
+- Chieftains' bronze seals → Voting member nodes in Raft cluster (Nodes with active voting rights (`Voter` status))
+- Two seals out of three needed to open → Quorum / Majority rule (Simple majority required to commit logs or elect leaders ($N/2 + 1$))
+- Couriers delayed along cliff trails → Asynchronous network delay & partition (Unpredictable network timing causing nodes to receive configs at different moments)
+- Three lower fortresses claiming 3-of-5 majority → Disjoint quorum formed under $C_{\text{new}}$ (Updated nodes forming a majority under new config and acting independently)
+- Two upper fortresses claiming 2-of-3 majority → Disjoint quorum formed under $C_{\text{old}}$ (Stale nodes forming a majority under old config, causing dual leaders)
+- The Decree of the Conjoined Halls → Joint Consensus configuration ($C_{\text{old,new}}$) (A transitional log entry binding both old and new memberships together)
+- Must have both old and new majorities → Joint Majority rule (Commits require separate majority approval from both $C_{\text{old}}$ and $C_{\text{new}}$)
+- Carving stone stelae before single-hall charter → Committing $C_{\text{old,new}}$ before appending $C_{\text{new}}$ (Ensuring transition is immutable across cluster before shedding old configuration)
+- Decades of additions/removals without split banners → Zero-downtime dynamic membership change (Provably safe online reconfiguration without stopping production services)
 </section>

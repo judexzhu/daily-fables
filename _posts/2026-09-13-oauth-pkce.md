@@ -92,20 +92,18 @@ PKCE 采用极具智慧的“一次性动态密码锁”彻底粉碎了这一攻
 - **防范 CSRF 与会话注入**：PKCE 天然将发起建联的“浏览器会话”与最后兑换 Token 的“应用实例”强制绑定在了一起，彻底杜绝了跨上下文攻击；
 - **行业安全强制演进**：鉴于 PKCE 卓越的防御效果，最新的 **OAuth 2.1 规范**已经废弃了传统的纯隐式授权（Implicit Grant），并**强制要求所有客户端（包括保密服务端应用）全面推行 PKCE**。
 
-### 隐喻对应表
+_隐喻对应表_
 
-| 故事元素 | 计算机概念 | 技术细节与工程映射 |
-| :--- | :--- | :--- |
-| **四海商行总舵议事堂** | 授权服务器（Authorization Server） | 负责认证用户身份并签发凭据的核心权限中心 |
-| **南门官银库** | 资源服务器（Resource Server / API） | 存放受保护数据（金银/业务数据）的受限服务端 |
-| **轻装走街的年轻脚商小郎** | 公开客户端（Public Client / SPA / App） | 运行在不可信用户设备上、无法安全保存私钥的应用 |
-| **老掌柜祖传的精铁私印** | 客户端密钥（Client Secret） | 仅能安全保存在私有服务器后端的静态长效密码 |
-| **总舵开具的朱墨勘合** | 授权码（Authorization Code） | 经浏览器重定向传递的短期一次性凭证 |
-| **暗巷里敲闷棍的“梁上燕”窃贼** | 授权码拦截攻击（URL Scheme Hijacking） | 恶意软件注册同名协议抢先截获重定向授权码 |
-| **小郎随手刻就、贴肉揣着的阳扣** | 代码验证器（`code_verifier`） | 客户端本地生成的临时高强度随机字符串 |
-| **压在湿润朱砂盒上的凹凸阴模** | 代码挑战（`code_challenge`） | 经 `SHA-256` 单向加密哈希处理后的公开摘要 |
-| **银库老供奉要求两扣合璧方可领银** | 令牌端点（Token Endpoint）的哈希比对 | 服务端校验 `SHA256(verifier) == challenge` |
-| **窃贼空有勘合而无阳扣遭锁拿** | 恶意软件因缺少 `code_verifier` 兑换失败 | 无法逆向哈希，攻击者即便拦截授权码也一无所获 |
+- 四海商行总舵议事堂 → 授权服务器（Authorization Server）（负责认证用户身份并签发凭据的核心权限中心）
+- 南门官银库 → 资源服务器（Resource Server / API）（存放受保护数据（金银/业务数据）的受限服务端）
+- 轻装走街的年轻脚商小郎 → 公开客户端（Public Client / SPA / App）（运行在不可信用户设备上、无法安全保存私钥的应用）
+- 老掌柜祖传的精铁私印 → 客户端密钥（Client Secret）（仅能安全保存在私有服务器后端的静态长效密码）
+- 总舵开具的朱墨勘合 → 授权码（Authorization Code）（经浏览器重定向传递的短期一次性凭证）
+- 暗巷里敲闷棍的“梁上燕”窃贼 → 授权码拦截攻击（URL Scheme Hijacking）（恶意软件注册同名协议抢先截获重定向授权码）
+- 小郎随手刻就、贴肉揣着的阳扣 → 代码验证器（`code_verifier`）（客户端本地生成的临时高强度随机字符串）
+- 压在湿润朱砂盒上的凹凸阴模 → 代码挑战（`code_challenge`）（经 `SHA-256` 单向加密哈希处理后的公开摘要）
+- 银库老供奉要求两扣合璧方可领银 → 令牌端点（Token Endpoint）的哈希比对（服务端校验 `SHA256(verifier) == challenge`）
+- 窃贼空有勘合而无阳扣遭锁拿 → 恶意软件因缺少 `code_verifier` 兑换失败（无法逆向哈希，攻击者即便拦截授权码也一无所获）
 </section>
 
 <section class="en" markdown="1">
@@ -192,18 +190,16 @@ PKCE completely eliminates this threat using a dynamic, one-time cryptographic c
 - **Inherent CSRF and Session Injection Defense**: Binds the browser authorization session directly to the specific application instance that initiated the request;
 - **Universal Industry Standard**: The modern **OAuth 2.1 specification** deprecates the old Implicit Flow entirely and **mandates PKCE for all OAuth clients**, including server-side confidential applications.
 
-### Metaphor Mapping
+_Metaphor mapping_
 
-| Story Element | Computing Concept | Technical Details & Architecture Mapping |
-| :--- | :--- | :--- |
-| **Great Seas Trading Guild central hall** | Authorization Server | Central authority authenticating users and issuing access tokens |
-| **Southern Imperial Silver Treasury** | Resource Server / Protected API | The service housing protected user resources and private endpoints |
-| **Young traveling peddler with a bamboo satchel** | Public Client (Mobile App / SPA) | An application running on an untrusted device unable to hold secrets |
-| **Elder master's ancestral iron stamp** | `client_secret` (Confidential Client credential) | A long-lived static secret that must never be embedded in public code |
-| **Disbursement warrant in red ink** | Authorization Code (`code`) | A temporary, single-use authorization code returned via redirect |
-| **Highwayman ambushing the youth in an alley** | Authorization Code Interception Attack | Malicious app intercepting redirect via custom URL scheme hijacking |
-| **Wooden Yang Toggle carved in private** | `code_verifier` | A locally generated, unshared high-entropy cryptographic secret |
-| **Cinnabar clay impression of the toggle** | `code_challenge` (SHA-256 hash) | The one-way mathematical hash sent over the wire with the request |
-| **Treasury elder requiring the toggle to fit the mold** | Token Endpoint verification | Server verifying that `SHA256(verifier) == challenge` |
-| **Thief caught empty-handed without the toggle** | Intercepted code rendered useless | Without the `code_verifier`, the stolen authorization code cannot be redeemed |
+- Great Seas Trading Guild central hall → Authorization Server (Central authority authenticating users and issuing access tokens)
+- Southern Imperial Silver Treasury → Resource Server / Protected API (The service housing protected user resources and private endpoints)
+- Young traveling peddler with a bamboo satchel → Public Client (Mobile App / SPA) (An application running on an untrusted device unable to hold secrets)
+- Elder master's ancestral iron stamp → `client_secret` (Confidential Client credential) (A long-lived static secret that must never be embedded in public code)
+- Disbursement warrant in red ink → Authorization Code (`code`) (A temporary, single-use authorization code returned via redirect)
+- Highwayman ambushing the youth in an alley → Authorization Code Interception Attack (Malicious app intercepting redirect via custom URL scheme hijacking)
+- Wooden Yang Toggle carved in private → `code_verifier` (A locally generated, unshared high-entropy cryptographic secret)
+- Cinnabar clay impression of the toggle → `code_challenge` (SHA-256 hash) (The one-way mathematical hash sent over the wire with the request)
+- Treasury elder requiring the toggle to fit the mold → Token Endpoint verification (Server verifying that `SHA256(verifier) == challenge`)
+- Thief caught empty-handed without the toggle → Intercepted code rendered useless (Without the `code_verifier`, the stolen authorization code cannot be redeemed)
 </section>

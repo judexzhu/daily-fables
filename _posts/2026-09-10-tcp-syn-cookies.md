@@ -99,21 +99,19 @@ youtube_id: "FiVNXfdXJa8"
   由于 TCP 序列号仅有 32 位（4 字节），Cookie 必须塞入时间戳、MSS 编码和散列值，导致原始 TCP Options（如窗口缩放因子 Window Scale、选择性确认 SACK）无法在 `SYN` 阶段被记录。
   现代 Linux 内核通过复用 `TCP Timestamps`（RFC 7323）字段中空闲的低位，将原本丢失的 TCP 选项安全藏入时间戳回显中，完美消除了早期 SYN Cookies 的性能折损。
 
-### 隐喻对应表
+_隐喻对应表_
 
-| 故事元素 | 计算机概念 | 技术细节与工程映射 |
-| :--- | :--- | :--- |
-| **关前狭长险峻的石峡** | 网络物理链路 / 入口带宽 | 外部所有流量进入系统的唯一物理通道 |
-| **商队先遣骑卒扣关** | `TCP SYN` 请求报文 | 客户端发起建连请求，携带客户端初始序列号（ISN_c） |
-| **《候见簿》与二百五十六个待命空席** | 半连接队列（SYN Backlog Queue） | 内核保存未完成握手连接的数据结构（TCB），容量有限 |
-| **虚假游骑高喊后遁入风沙** | SYN Flood 攻击（伪造源 IP） | 只发 SYN、不发 ACK，蓄意耗尽服务端队列资源的恶意流量 |
-| **候客册满导致真正商队受阻** | 拒绝服务（Denial of Service） | 内核半连接队列打满，合法请求被直接丢弃（Drop） |
-| **老关令下令烧账、一字不记** | 无状态连接握手（Stateless Handshake） | 开启 SYN Cookies，面对未经验证的 SYN 坚决不分配内存 |
-| **精铜密印与漏壶时刻推演** | 加密哈希函数与慢速时钟计数器 | 结合 4-tuple、内部密钥与 64 秒滴答的时钟计算 Cookie |
-| **滚烫的无字蜡符** | SYN Cookie（服务端初始序列号 ISN_s） | 编码了 MSS、时间戳和散列签名的 32 位序列号 |
-| **正主携蜡符归来验合暗齿** | 客户端回复的第三次握手 `ACK` 报文 | 校验 `ack_seq - 1` 是否与本地哈希重算结果吻合 |
-| **验合成功方才在瓮城正堂登账** | 移入全连接队列（Accept Queue） | 握手完全确认后，才正式为 Socket 分配内存并交付应用层 |
-| **蜡块微小记不下大车轴距** | 传统模式下丢失 TCP Options | 早期 32 位限制丢失 Window Scale / SACK，现借时间戳弥补 |
+- 关前狭长险峻的石峡 → 网络物理链路 / 入口带宽（外部所有流量进入系统的唯一物理通道）
+- 商队先遣骑卒扣关 → `TCP SYN` 请求报文（客户端发起建连请求，携带客户端初始序列号（ISN_c））
+- 《候见簿》与二百五十六个待命空席 → 半连接队列（SYN Backlog Queue）（内核保存未完成握手连接的数据结构（TCB），容量有限）
+- 虚假游骑高喊后遁入风沙 → SYN Flood 攻击（伪造源 IP）（只发 SYN、不发 ACK，蓄意耗尽服务端队列资源的恶意流量）
+- 候客册满导致真正商队受阻 → 拒绝服务（Denial of Service）（内核半连接队列打满，合法请求被直接丢弃（Drop））
+- 老关令下令烧账、一字不记 → 无状态连接握手（Stateless Handshake）（开启 SYN Cookies，面对未经验证的 SYN 坚决不分配内存）
+- 精铜密印与漏壶时刻推演 → 加密哈希函数与慢速时钟计数器（结合 4-tuple、内部密钥与 64 秒滴答的时钟计算 Cookie）
+- 滚烫的无字蜡符 → SYN Cookie（服务端初始序列号 ISN_s）（编码了 MSS、时间戳和散列签名的 32 位序列号）
+- 正主携蜡符归来验合暗齿 → 客户端回复的第三次握手 `ACK` 报文（校验 `ack_seq - 1` 是否与本地哈希重算结果吻合）
+- 验合成功方才在瓮城正堂登账 → 移入全连接队列（Accept Queue）（握手完全确认后，才正式为 Socket 分配内存并交付应用层）
+- 蜡块微小记不下大车轴距 → 传统模式下丢失 TCP Options（早期 32 位限制丢失 Window Scale / SACK，现借时间戳弥补）
 </section>
 
 <section class="en" markdown="1">
@@ -207,19 +205,17 @@ Upon receiving this `ACK`, the server reconstructs the hash on the fly using the
   Because the TCP sequence number is constrained to 32 bits, the cookie must pack timestamp counters, MSS indices, and cryptographic hashes into limited bits, initially sacrificing TCP Options like Window Scale and Selective Acknowledgment (SACK).
   Modern Linux kernels gracefully bypass this limitation by encoding original TCP options into unused low bits of the `TCP Timestamps` option (RFC 7323), eliminating performance compromises.
 
-### Metaphor Mapping
+_Metaphor mapping_
 
-| Story Element | Computing Concept | Technical Details & Architecture Mapping |
-| :--- | :--- | :--- |
-| **Narrow, precipitous mountain gorge** | Physical network link & ingress bandwidth | The constrained physical channel through which all packets enter |
-| **Courier knocking at the gate** | `TCP SYN` request packet | Client initiating a connection with Initial Sequence Number (`ISN_c`) |
-| **The 256-row Waiting Register** | Half-open SYN Backlog Queue | In-kernel data structure storing incomplete handshakes (TCBs) |
-| **Phantom riders shouting and fleeing** | SYN Flood attack (Spoofed IP) | Attacker sending SYNs without answering ACKs to exhaust server queues |
-| **Full ledger blocking true merchant caravans** | Denial of Service (DoS) | Saturated SYN queue forcing kernel to drop legitimate user connections |
-| **Old magistrate burning the ledger** | Stateless handshake architecture | Enabling SYN Cookies; refusing to commit local RAM to untrusted SYNs |
-| **Bronze cipher stamp & water-clock ticks** | Cryptographic hash & coarse time counter | Hashing 4-tuple + server secret key + slow-ticking 64-second time index |
-| **The stamped wax token** | SYN Cookie (Server Initial Sequence Number) | 32-bit sequence number encoding MSS index, timestamp, and crypto hash |
-| **Merchant presenting the token upon arrival** | Third handshake `ACK` (`ack_seq = Cookie + 1`) | Valid client acknowledging the SYN-ACK, returning the cookie challenge |
-| **Cipher re-verification & opening inner hall** | Connection promotion to Accept Queue | Sockets instantiated and handed to application only after handshake completes |
-| **Wax seal unable to record wagon dimensions** | Traditional loss of TCP Options | Historical loss of Window Scale/SACK, resolved in modern kernels via Timestamps |
+- Narrow, precipitous mountain gorge → Physical network link & ingress bandwidth (The constrained physical channel through which all packets enter)
+- Courier knocking at the gate → `TCP SYN` request packet (Client initiating a connection with Initial Sequence Number (`ISN_c`))
+- The 256-row Waiting Register → Half-open SYN Backlog Queue (In-kernel data structure storing incomplete handshakes (TCBs))
+- Phantom riders shouting and fleeing → SYN Flood attack (Spoofed IP) (Attacker sending SYNs without answering ACKs to exhaust server queues)
+- Full ledger blocking true merchant caravans → Denial of Service (DoS) (Saturated SYN queue forcing kernel to drop legitimate user connections)
+- Old magistrate burning the ledger → Stateless handshake architecture (Enabling SYN Cookies; refusing to commit local RAM to untrusted SYNs)
+- Bronze cipher stamp & water-clock ticks → Cryptographic hash & coarse time counter (Hashing 4-tuple + server secret key + slow-ticking 64-second time index)
+- The stamped wax token → SYN Cookie (Server Initial Sequence Number) (32-bit sequence number encoding MSS index, timestamp, and crypto hash)
+- Merchant presenting the token upon arrival → Third handshake `ACK` (`ack_seq = Cookie + 1`) (Valid client acknowledging the SYN-ACK, returning the cookie challenge)
+- Cipher re-verification & opening inner hall → Connection promotion to Accept Queue (Sockets instantiated and handed to application only after handshake completes)
+- Wax seal unable to record wagon dimensions → Traditional loss of TCP Options (Historical loss of Window Scale/SACK, resolved in modern kernels via Timestamps)
 </section>
