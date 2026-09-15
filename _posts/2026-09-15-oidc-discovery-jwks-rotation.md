@@ -6,6 +6,7 @@ title_en: "The Stone Stele's Notice and the Rotating Seals"
 concept: "OIDC Discovery & Dynamic JWKS Key Rotation"
 tags: [security, identity, web]
 illustration: /assets/art/2026-09-15-oidc-discovery-jwks-rotation.jpg
+youtube_id: "V_2jLWl6bfc"
 ---
 <section class="zh" markdown="1">
 京师尚书省掌管天下公文，每日发往各州府、各大行会与关防榷场的文书数以千计。
