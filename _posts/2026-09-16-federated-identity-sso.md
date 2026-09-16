@@ -6,6 +6,7 @@ title_en: "The Nine Gates League and the Master Crest"
 concept: "Federated Identity & Single Sign-On (SSO) with OpenID Connect"
 tags: [security, identity, web]
 illustration: /assets/art/2026-09-16-federated-identity-sso.jpg
+youtube_id: "dZVxxPjoCaI"
 ---
 <section class="zh" markdown="1">
 汴京繁华盖世，城中立着九大商帮行会：丝绸行、茶叶行、青瓷行、药材行、香料行……行行门禁森严，库房连绵。
