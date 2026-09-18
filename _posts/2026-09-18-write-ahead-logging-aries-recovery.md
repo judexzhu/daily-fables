@@ -6,6 +6,7 @@ title_en: "The Three Passes of the Fire-Scarred Ledger"
 concept: "Write-Ahead Logging (WAL) and the ARIES Crash Recovery Algorithm"
 tags: [databases, storage, performance]
 illustration: /assets/art/2026-09-18-write-ahead-logging-aries-recovery.jpg
+youtube_id: "oxXYL058XOk"
 ---
 <section class="zh" markdown="1">
 北都户部太仓掌管天下钱粮，四海赋税与官银日夜兼程运抵于此，入库出纳络绎不绝。
