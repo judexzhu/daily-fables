@@ -6,6 +6,7 @@ title_en: "The Waterway Bells of Ten Thousand Moorings"
 concept: "Linux epoll, Event-Driven I/O Multiplexing, and the C10K Problem"
 tags: [linux, performance, networking]
 illustration: /assets/art/2026-09-17-epoll-io-multiplexing-c10k.jpg
+youtube_id: "pfljO_j2LbM"
 ---
 <section class="zh" markdown="1">
 大运河与长江交汇的广济港，是天下粮纲与盐铁漕运的咽喉要道。
