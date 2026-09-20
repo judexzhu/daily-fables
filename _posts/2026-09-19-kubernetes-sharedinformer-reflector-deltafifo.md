@@ -6,6 +6,7 @@ title_en: "The Reflected Bronze Mirrors of a Thousand Terraces"
 concept: "Kubernetes SharedInformer: Reflector, DeltaFIFO, Indexer, and Local Cache Sync"
 tags: [kubernetes, distributed-systems, performance]
 illustration: /assets/art/2026-09-19-kubernetes-sharedinformer-reflector-deltafifo.jpg
+youtube_id: "LMDKilHkaac"
 ---
 <section class="zh" markdown="1">
 苍山万仞，山势险峻。从山巅到山脚，层层叠叠修筑了数千顷梯田与纵横交错的灌溉水渠。
