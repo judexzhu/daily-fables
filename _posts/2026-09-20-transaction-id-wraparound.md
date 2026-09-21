@@ -6,6 +6,7 @@ title_en: "The Circular Sky-Wheel and the Eternal Cinnabar Seal"
 concept: "Transaction ID Wraparound (Postgres Vacuum Freeze)"
 tags: [databases, storage, sre]
 illustration: /assets/art/2026-09-20-transaction-id-wraparound.jpg
+youtube_id: "bK0c8hv4S_s"
 ---
 <section class="zh" markdown="1">
 大虞帝国的司历台与太极秘阁，坐落于皇城最幽深的山巅。这里封存着开国八百年来全天下的宗族田契、官民契约与帝王诏令。
