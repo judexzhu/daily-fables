@@ -6,7 +6,7 @@ title_en: "The Right Door and the Ceiling Plaque"
 concept: "Lehman-Yao B-link Tree"
 tags: [databases, storage, performance]
 illustration: /assets/art/2026-09-22-lehman-yao-b-link-tree.jpg
-youtube_id: ""
+youtube_id: "vL43x-v5yI0"
 ---
 <section class="zh" markdown="1">
 京城的千卷阁是一座依山而建的九层八角木楼，里面收纳着四海赋税账册与户籍黄册。
