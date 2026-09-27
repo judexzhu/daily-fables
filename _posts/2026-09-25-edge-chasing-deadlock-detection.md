@@ -116,6 +116,7 @@ youtube_id: "PB2fyYRwGyw"
 事务 $T_3$ 在节点 C 上持有 $R_3$，却反过来等待节点 A 上的资源 $R_1$（被 $T_1$ 持有）。
 
 在此场景下，系统形成了一条跨越物理网络拓扑的**环形等待链**（*Wait-For Graph Cycle*）：
+
 $$T_1 \to T_2 \to T_3 \to T_1$$
 
 没有任何一个单独的节点拥有全局的视角。每个节点只能看到局部的等待边（例如节点 A 只知道 $T_1 \to T_2$），所有事务都在完全合规、静默地等待，若无外力介入，系统将陷入永久停滞。
@@ -128,7 +129,9 @@ $$T_1 \to T_2 \to T_3 \to T_1$$
 
 1. **探测报文（Probe Message）**：
    算法定义了一个结构极轻简的探测消息三元组：
+
    $$\text{Probe}(i, j, k)$$
+
    其中 $i$ 是发起死锁检测的初始事务（*Initiator*），$j$ 是当前发送报文的事务或节点（*Sender*），$k$ 是接收报文并持有后续锁的事务或节点（*Receiver*）。
 2. **边缘追踪传播逻辑（Edge Chasing Rule）**：
    - **发起**：当事务 $T_i$ 阻塞在 $T_j$ 持有的锁上，且阻塞时长超过了合理的怀疑等待窗口（避免为微秒级的正常锁争用浪费网络资源），$T_i$ 便向 $T_j$ 发送初始探测报文 $\text{Probe}(i, i, j)$。
@@ -275,6 +278,7 @@ Transaction $T_2$ on Node B holds resource $R_2$ and waits for resource $R_3$ on
 Transaction $T_3$ on Node C holds resource $R_3$ and in turn waits for resource $R_1$ on Node A (held by $T_1$).
 
 Here, the system forms a cyclic dependency chain across the physical network:
+
 $$T_1 \to T_2 \to T_3 \to T_1$$
 
 No single node possesses a global view of the **Wait-For Graph (WFG)**. Each node only sees its local slice (for instance, Node A only knows that $T_1$ waits for $T_2$). Every transaction waits politely and legitimately; without external intervention, the distributed system freezes permanently.
@@ -287,7 +291,9 @@ In 1983, computer scientists K. Mani Chandy, Jayadev Misra, and Laura M. Haas pu
 
 1. **Probe Messages**:
    The algorithm defines a lightweight probe message triplet:
+
    $$\text{Probe}(i, j, k)$$
+
    where $i$ is the initial transaction that initiated the deadlock detection (*Initiator*), $j$ is the transaction/node transmitting the probe (*Sender*), and $k$ is the blocked-on transaction/node (*Receiver*).
 2. **Edge Chasing Propagation Rules**:
    - **Initiation**: When transaction $T_i$ blocks on a lock held by $T_j$ and remains blocked beyond a reasonable grace period (preventing probe spam for sub-millisecond lock contention), $T_i$ generates and sends an initial probe $\text{Probe}(i, i, j)$ along the wait-for edge.
