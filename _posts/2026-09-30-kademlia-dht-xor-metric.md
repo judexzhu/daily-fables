@@ -6,6 +6,7 @@ title_en: "The Sea of Cloud-Peaks and the Compass of Differing Marks"
 concept: "Kademlia Distributed Hash Table (XOR Metric and k-Buckets)"
 tags: [distributed-systems, networking, storage]
 illustration: /assets/art/2026-09-30-kademlia-dht-xor-metric.jpg
+youtube_id: "xrquQaL6F00"
 ---
 <section class="zh" markdown="1">
 在西极无涯的苍茫群山中，横亘着一片被称为“万峰海”的险绝秘境。
