@@ -6,7 +6,7 @@ title_en: "The Tolling Gong and the Unbroken View"
 concept: "Virtual Synchrony (Isis Toolkit & Group Communication Systems)"
 tags: [distributed-systems]
 illustration: /assets/art/2026-10-07-virtual-synchrony.jpg
-youtube_id: ""
+youtube_id: "8Yy9IEBy3p0"
 ---
 <section class="zh" markdown="1">
 太行深处的洗墨峰顶，有一座孤悬绝壁之上的“灵台同律斋”。
