@@ -6,6 +6,7 @@ title_en: "The Hermit's Reign"
 concept: "Raft Pre-Vote Protocol and Disruptive Server Defense"
 tags: [distributed-systems, etcd]
 illustration: /assets/art/2026-10-06-raft-prevote-disruptive-server.jpg
+youtube_id: "zFMD_cakCa8"
 ---
 <section class="zh" markdown="1">
 大衍王朝的疆域由五座雄关共同守望：除了坐镇关中平原的中央京畿，东南西北四方各设一座重镇，合称“五岳磐石”。
