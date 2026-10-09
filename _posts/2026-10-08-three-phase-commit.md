@@ -6,6 +6,7 @@ title_en: "The Three Flags of the Silver Pass"
 concept: "Three-Phase Commit (3PC Protocol)"
 tags: [distributed-systems]
 illustration: /assets/art/2026-10-08-three-phase-commit.jpg
+youtube_id: "N1hlPAjmgUI"
 ---
 <section class="zh" markdown="1">
 太行陉最险要的关隘深处，依山势筑有三座大仓：东崖的甲字粮仓、西涧的乙字草料库、南坡的丙字铁铠司。
