@@ -55,50 +55,51 @@ youtube_id: "XpRmN9VwUMc"
 
 ---
 
-By now you've probably recognized it: this is the renowned **Copysets Replication Algorithm**, introduced by Asaf Cidon et al. (Stanford University) in their award-winning USENIX ATC 2013 paper *Copysets: Reducing the Frequency of Data Loss in Cloud Storage*.
+到这里，你大概已经认出来了：这就是分布式存储系统领域著名的 **Copysets 复制算法**（Copysets Replication），由斯坦福大学 Asaf Cidon 等人在 USENIX ATC 2013 顶会上提出，并荣获 Best Paper 奖项。
 
-### What it is
+### 这是什么
 
-**Copysets** is a replication placement algorithm designed for large-scale distributed storage systems (such as HDFS, Ceph, RAMCloud, Cassandra, and cloud object stores) to minimize the probability of catastrophic data loss caused by correlated or simultaneous multi-node failures.
+**Copysets** 是一种专为大规模分布式存储系统（如 HDFS、Ceph、RAMCloud、Cassandra 以及各类云原生对象存储）设计的**副本放置算法**，其核心目标是：在不降低单节点故障后并行恢复速度的前提下，彻底扼杀因机架掉电、PDU故障、网络分区等**相关性多节点并发故障**（*Correlated Failures*）引发的灾难性永久数据丢失。
 
-In modern distributed storage, data objects (or blocks) are replicated across $R$ nodes (typically $R = 3$) for fault tolerance:
-1. **The Trap of Random Replication**:
-   Traditional systems (like default HDFS or Ceph CRUSH rules) place the $R$ replicas of each chunk on randomly selected nodes across the cluster. To optimize background recovery time and minimize recovery latency after a single-node failure, each node distributes its replicas across many distinct peers—a metric called **Scatter Width** ($S$). With random replication, the number of distinct node triplets holding data approaches:
+在现代分布式存储中，每个数据块通常保存 $R$ 个副本（工业界常设为 $R = 3$）：
+1. **随机副本放置的陷阱（Random Replication）**：
+   传统的分布式文件系统（如早期 HDFS 或 Ceph 的默认 CRUSH 规则）倾向于将每个数据块的 3 个副本完全随机散落到集群中的不同节点上。为了在单个节点宕机时，能有尽可能多的健康节点并发协助拉取数据、极速完成重建，系统会刻意让每个节点的副本伙伴分散给许多不同的机器——这个指标被称为**散布度（*Scatter Width*, $S$）**。
+   然而，完全随机放置会导致集群中实际产生的数据三元组数量爆炸，接近：
    $$N \times \binom{S}{R-1}$$
-   In a cluster of $N = 5000$ nodes with $S = 10$ and $R = 3$, random replication generates around $225,000$ distinct replication triplets out of the universe of possible triplets.
-2. **The Correlated Failure Catastrophe**:
-   In cloud data centers, simultaneous multi-node failures are routine: power distribution unit (PDU) outages, top-of-rack switch crashes, rolling kernel panic updates, or cooling failures frequently take down 1% to 2% of nodes simultaneously (e.g., $f = 50$ nodes dying at once).
-   When $f$ nodes fail, they form $\binom{f}{R} = \binom{50}{3} = 19,600$ unique failing triplets. With random replication, because those $225,000$ data-holding triplets are scattered haphazardly across the cluster, the probability that *at least one* data triplet intersects the set of dead nodes is extremely high:
-   $$P(\text{Data Loss}) \approx 1 - \left(1 - \frac{\text{Data Triplets}}{\text{Total Triplets}}\right)^{\binom{f}{R}} \approx 19.1\%$$
-   Nearly **1 out of every 5** correlated failure events destroys data permanently!
-3. **The Copyset Solution**:
-   Copysets proves that data loss occurs if and only if all nodes in a data set's replication group fail simultaneously. Therefore, the goal is to **minimize the number of distinct node sets (copysets) created**, while holding the scatter width $S$ constant to preserve fast parallel recovery.
-   - The cluster defines an exact, minimal family of subsets of size $R$, such that each node appears in at least $S$ copysets. The total number of copysets is reduced to just:
+   在一个拥有 $N = 5000$ 个节点、设定散布度 $S = 10$ 的集群中，随机放置会生成约 $225,000$ 个不同的三节点副本组合。
+2. **相关性故障下的灭顶之灾**：
+   在真实云数据中心，服务器宕机很少是孤立发生的——供电分配单元（PDU）断电、机架顶置交换机（TOR）宕机、内核补丁滚动升级崩溃，经常瞬间导致整个集群 1%~2% 的节点（例如 $f = 50$ 台机器）同时下线。
+   当 50 台机器同时宕机时，这 50 台机器本身能形成 $\binom{50}{3} = 19,600$ 种三元组组合。在随机放置下，由于全网散落着高达 22.5 万种数据块三元组，这近两万个故障组合撞上哪怕某一个数据块三元组的概率高达：
+   $$P(\text{Data Loss}) \approx 1 - \left(1 - \frac{225,000}{\binom{5000}{3}}\right)^{19,600} \approx 19.1\%$$
+   这意味着：每发生五次小规模机架掉电或网络风暴，就会有一次遭遇不可逆的永久丢数据！
+3. **Copysets 的数学破局**：
+   Copysets 论文指出了一个决定性真理：**丢失数据的根本原因，不是节点宕机，而是宕机节点恰好完整覆盖了某一个副本集合**。因此，系统应当在保证散布度 $S$ 不变（维持极速并行重建能力）的前提下，**将全网创建的副本集合总数最小化**。
+   - 系统将 5000 个节点通过排列算法划分为固定、最小化的副本集合族（Copysets），使得每个节点恰好出现在 $S$ 个 Copyset 中。全网的副本组合总数被锁死为：
      $$\text{Copysets} = \frac{N \times S}{R} = \frac{5000 \times 10}{3} \approx 16,666$$
-   - Every chunk or object must choose its replicas strictly from one of these pre-computed copysets, rather than picking nodes independently at random.
-   - Under the same 50-node failure event, the probability of data loss plummets from ~19.1% down to ~1.5%—slashing data loss frequency by more than an order of magnitude without compromising single-node repair speed.
+   - 任何新数据块写入时，只能严格从这 16,666 组登记在册的 Copyset 中挑选一组存放，严禁随意在全网自由组合。
+   - 在完全相同的 50 节点并发宕机下，数据丢失概率从 19.1% 断崖式暴跌至 1.5% 左右，将数据耐受度直接提升了一个数量级！
 
-### Why it matters
+### 为什么重要
 
-1. **Defending Against Correlated Multi-Node Outages**:
-   Power outages, rack-level failures, firmware bugs, and network partitioning do not kill servers one by one; they kill dozens of machines at the exact same second. Copysets drastically reduces the overlap between failure sets and data sets, preventing correlated outages from turning into permanent data corruption.
+1. **筑牢云原生存储的容灾底线**：
+   在千台规模以上的云原生集群中，单机故障是常态，多机相关性并发故障是致命杀手。Copysets 极大压缩了故障集合与数据分布的几何交集，杜绝了多机并发宕机演变成业务不可逆灾难。
 
-2. **Decoupling Repair Speed from Data Loss Risk**:
-   Storage engineers previously believed there was a fundamental trade-off: high scatter width meant faster single-node recovery (many nodes pull missing blocks in parallel), but guaranteed high data loss during multi-node crashes. Copysets broke this trade-off by proving that structured permutation assignment achieves both: you maintain a high scatter width $S$ for fast parallel rebuilds, while eliminating the astronomical tail of dangerous replication combinations.
+2. **解耦恢复速度与容灾安全的矛盾**：
+   在 Copysets 问世之前，存储架构师普遍认为“极速修复”与“多机容灾”是不可调和的矛盾（散布越广修复越快，但死得越惨）。Copysets 证明了通过精巧的子集族划分，既能享受高散布度带来的全集群并发恢复带宽，又斩断了漫天随机排列组合带来的厄运。
 
-3. **Foundation for Cloud Storage Orchestration**:
-   The insights from Copysets directly influenced replication topologies in Google Colossus, Facebook Tectonic, Apache Hadoop (HDFS-9226 Copyset Placement Policy), and Kubernetes volume topology orchestrators. Whenever a distributed storage cluster scales beyond hundreds of nodes, unconstrained random placement becomes an existential liability; structured copyset families are the mathematical shield.
+3. **现代工业级存储的拓扑基石**：
+   Copysets 的理论深刻影响了后续工业界存储系统的副本拓扑设计，包括 Google Colossus、Facebook Tectonic、Apache Hadoop 的 HDFS-9226 副本放置策略等。在超大规模存储架构中，结构化副本约束已经成为标配防线。
 
-_Metaphor mapping_
+_隐喻对应表_
 
-- Five thousand imperial granaries → Distributed storage cluster of $N = 5000$ storage nodes
-- Three red-lacquered iron chests → Triplicate replication ($R = 3$ replicas per block)
-- Casting wooden dice at the frontier gate → Unconstrained random replica placement (Random Replication)
-- Fireplace help from all surviving granaries → High scatter width ($S$) for rapid parallel single-node recovery
-- Fifty granaries burned simultaneously → Correlated multi-node failure event ($f = 50$ nodes down)
-- Over twenty thousand combinations of doom → Number of failing triplets $\binom{f}{R}$ intersecting scattered data groups
-- Order of the Three-Chest League (*Copysets*) → Structured Copysets placement policy
-- Fixed kinship quota for each storehouse → Bounded scatter width $S = 10$ with minimal copyset cardinality ($N \times S / R$)
+- 五千座皇家粮仓 → 拥有 $N = 5000$ 个存储节点的分布式存储集群
+- 三只朱漆铁皮匣 → 三副本冗余容错机制（$R = 3$）
+- 关口掷木樗散存 → 完全无约束随机副本放置（Random Replication）
+- 全营仓房协助复原 → 维持高散布度（$S$）带来的快速并行节点修复
+- 五十座粮仓同时遭焚 → 机架供电或交换机引发的 50 节点相关性并发故障（$f = 50$）
+- 近两万组绝灭厄运 → 宕机节点组合出的失败三元组撞击数据分布
+- 连环三匣令（结义之盟） → 结构化 Copysets 约束放置策略
+- 钦定结伴额度 → 固定的散布度 $S = 10$ 与最小化的 Copyset 集合规模（$N \times S / R$）
 </section>
 <section class="en" markdown="1">
 On the vast frontier plains of the Grand Yong Empire stood five thousand fortified imperial granaries.
