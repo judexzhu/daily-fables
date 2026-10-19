@@ -8,7 +8,7 @@ tags: [queueing-theory, performance, sre]
 illustration: /assets/art/2026-10-19-littles-law.jpg
 youtube_id: "0AqiLsZ6Fqo"
 ---
-
+<section class="zh" markdown="1">
 望江楼是渡口镇最大的一家茶楼。三层,临江,飞檐挑得像鹤翅。往来船家、盐商、镖师,下了船,头一件事就是进去讨一壶热茶,歇脚看江。
 
 老掌柜在世时有个老毛病:想知道楼里坐了多少人,就派伙计从一楼数到三楼。伙计数完下楼,客人早换了两拨——数出来的数,出门就作废。每年腊月,防火的官差来问:"楼里若走了水,多少人要逃?"老掌柜只能支吾。
@@ -45,8 +45,6 @@ youtube_id: "0AqiLsZ6Fqo"
 
 讲到这儿,你多半已经认出来了:这就是排队论里的 *Little's Law*——利特尔定律,L = λ × W。
 
----
-
 ### 这是什么
 
 *Little's Law*(利特尔定律)是排队论中最著名的定理:任何一个系统,只要处在稳定状态,**系统内的平均人数 L,等于平均到达率 λ 乘以每人平均逗留时间 W**,即 L = λ × W。
@@ -81,8 +79,8 @@ _隐喻对应表_
 - 渡口船只的账 → 定律对任意"有进出、有逗留"的系统普适(*universality*)
 - 老掌柜从一楼数到三楼 → 全量轮询,数完即过期(*stale census*)
 
----
-
+</section>
+<section class="en" markdown="1">
 River-View Tower was the grandest teahouse in Ferry-Crossing Town: three stories, right on the water, eaves lifted like a heron's wings. Boatmen, salt merchants, and escort guards stepping off the boats all did the same first thing—go in, order a pot of hot tea, rest their legs, watch the river.
 
 The old master had an old habit: to know how many guests sat inside, he sent a waiter counting from the first floor to the third. By the time the waiter climbed back down, the crowd had turned over twice—the number was stale before it left the building. Every twelfth month the fire warden came asking: "If this tower catches, how many must flee?" The old master could only mumble.
@@ -119,8 +117,6 @@ Later she ran the same arithmetic on the ferry crossing itself: three boats moor
 
 By now you've probably recognized it: this is *Little's Law* from queueing theory—L = λ × W.
 
----
-
 ### What it is
 
 *Little's Law* is the most famous theorem of queueing theory: for any system in steady state, **the average number inside, L, equals the average arrival rate, λ, times the average time each stays, W**: L = λ × W.
@@ -154,3 +150,4 @@ _Metaphor mapping_
 - morning tide drifts the ledger, length steadies it → the steady-state assumption (*steady state*)
 - the ferry-boat accounting → the law's universality to any door-entry-dwell system (*universality*)
 - the old master counting floor by floor → full-table polling, stale on arrival (*stale census*)
+</section>
