@@ -69,10 +69,6 @@ Browse the full concept index at [fables.day/concepts](https://fables.day/concep
 - **Analytics**: Google Analytics 4 + Google Search Console
 - **SEO**: Open Graph + Twitter Card meta tags, jekyll-sitemap
 
-## Post format
-
-See [POST_FORMAT.md](POST_FORMAT.md) for the fable writing guide and frontmatter schema.
-
 ## License
 
 Content (fables and illustrations) is copyright. Source code (layouts, CSS, scripts) is MIT.
