@@ -6,6 +6,7 @@ title_en: "A Thousand Floods"
 concept: "Deterministic Simulation Testing"
 tags: [distributed-systems, sre]
 illustration: /assets/art/2026-10-23-deterministic-simulation-testing.jpg
+youtube_id: "r-JoQLBwi2E"
 ---
 <section class="zh" markdown="1">
 望川城的春天，是从更鼓开始的。
