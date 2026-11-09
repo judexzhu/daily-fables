@@ -6,6 +6,7 @@ title_en: "Anyone May Plant a Signpost"
 concept: "BGP Route Origin Validation (RPKI ROAs and ROV)"
 tags: [networking, security]
 illustration: /assets/art/2026-11-08-bgp-origin-validation-rpki.jpg
+youtube_id: "-rmEjAQU9yk"
 ---
 <section class="zh" markdown="1">
 从悬河渡往西，翻三道岭，是一条走了一千年的驿道。
